@@ -55,7 +55,7 @@ class MyApp extends StatelessWidget {
             )
           ) ),
       //home screen
-      home: StartUpView()
+      home: LoginView()
     );
   }
 }

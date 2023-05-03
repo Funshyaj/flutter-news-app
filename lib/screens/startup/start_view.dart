@@ -68,10 +68,6 @@ class StartUpView extends StackedView<StartUpViewModel> {
                   const SizedBox(height: 15),
                   FloatingActionButton.extended(onPressed: (){
                     viewModel.runStartupLogic();
-                    // Navigator.push(
-                    //   context,
-                    //   MaterialPageRoute(builder: (context) => const Login()),
-                    // );
                   },
                     backgroundColor: Colors.indigo[800],
                     label:  Text(viewModel.btnName,
