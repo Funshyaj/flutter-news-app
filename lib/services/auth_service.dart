@@ -1,3 +1,5 @@
+import 'package:hive/hive.dart';
+
 abstract class AuthenticationService {
   bool userLoggedIn();
 }
@@ -5,8 +7,11 @@ abstract class AuthenticationService {
 
 class AuthenticationServiceImpl extends AuthenticationService {
   @override
-  bool userLoggedIn() {
-    return true;
+   bool userLoggedIn() {
+    //   var box = await Hive.openBox('userDatabase');
+    // if(1==1) {
+      return true;
+    // }
   }
 }
 

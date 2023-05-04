@@ -14,16 +14,13 @@ class StartUpViewModel extends BaseViewModel {
   final _navigationService = locator<NavigationService>();
 
   runStartupLogic()  {
-    // 2. Check if the user is logged in
-    if (_authenticationService.userLoggedIn()) {
-    //     // 3. Navigate to HomeView
-    //     _navigationService.replaceWith(Routes.);
-    //   } else {
-        // 4. Or navigate to LoginView
-      // _navigationService.navigateToLoginView();
+    // 2. Check if the database is empty
+    if (!_authenticationService.userLoggedIn()) {
       _navigationService.navigateTo(Routes.loginView);
-      
-      print('ready');
+    }
+    // 3. Navigate to Sign up view
+    else {
+      _navigationService.navigateTo(Routes.signUpView);
     }
   }
 

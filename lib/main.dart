@@ -1,9 +1,12 @@
 import 'package:demo_app/app/app.locator.dart';
+import 'package:demo_app/app/app.router.dart';
 import 'package:demo_app/screens/login/login_view.dart';
 import 'package:demo_app/screens/startup/start_view.dart';
 import 'package:flutter/material.dart';
 import 'package:hive_flutter/hive_flutter.dart';
 import 'package:hive/hive.dart';
+import 'package:stacked/stacked_annotations.dart';
+import 'package:stacked_services/stacked_services.dart';
 
 
 
@@ -54,8 +57,13 @@ class MyApp extends StatelessWidget {
                 )
             )
           ) ),
-      //home screen
-      home: LoginView()
+
+      //start up route
+      initialRoute: Routes.startUpView,
+     //dependencies for routes
+     navigatorKey: StackedService.navigatorKey,
+      onGenerateRoute:StackedRouter().onGenerateRoute,
+      //start up screen
     );
   }
 }
