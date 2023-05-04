@@ -31,6 +31,7 @@ class MyApp extends StatelessWidget {
       //theme of the app
       theme: ThemeData(
           //setting global theme for widgets in the app
+        fontFamily: 'Nunito',
           primarySwatch: Colors.indigo,
         inputDecorationTheme:  InputDecorationTheme(
           enabledBorder: OutlineInputBorder(
@@ -60,6 +61,7 @@ class MyApp extends StatelessWidget {
 
       //start up route
       initialRoute: Routes.startUpView,
+
      //dependencies for routes
      navigatorKey: StackedService.navigatorKey,
       onGenerateRoute:StackedRouter().onGenerateRoute,

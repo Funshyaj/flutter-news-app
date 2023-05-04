@@ -1,17 +1,33 @@
 import 'package:hive/hive.dart';
 
 abstract class AuthenticationService {
-  bool userLoggedIn();
+  userLoggedIn();
+  setNonFirstTime();
+  userFirstTimeChecker();
 }
-
 
 class AuthenticationServiceImpl extends AuthenticationService {
   @override
-   bool userLoggedIn() {
-    //   var box = await Hive.openBox('userDatabase');
-    // if(1==1) {
-      return true;
-    // }
+  userFirstTimeChecker() async{
+    var box = await Hive.openBox('userDatabase');
+    bool firstTime =  box.get('firstTime', defaultValue: true);
+    return firstTime ;
   }
+
+  @override
+    setNonFirstTime() async{
+      var box = await Hive.openBox('userDatabase');
+      box.put('firstTime', false);
+  }
+
+
+
+  @override
+   userLoggedIn() {
+    // TODO: implement userLoggedIn
+    throw UnimplementedError();
+  }
+
+
 }
 

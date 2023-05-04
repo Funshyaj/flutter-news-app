@@ -88,13 +88,12 @@ flutter:
   # list giving the asset and other descriptors for the font. For
   # example:
   fonts:
-   - family: NunitoBold
+   - family: Nunito
      fonts:
        - asset: assets/fonts/static/Nunito-ExtraBold.ttf
-
-   - family: NunitoRegular
-     fonts:
+         weight: 700
        - asset: assets/fonts/static/Nunito-Regular.ttf
+         weight: 400
 
   #  fonts:
 #    - family: Nunito
