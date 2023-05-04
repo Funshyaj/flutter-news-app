@@ -1,11 +1,12 @@
 import 'package:flutter/material.dart';
 
 class Input extends StatelessWidget {
-  const Input({Key? key, required this.label, required this.placeholderTxt, required this.controller}) : super(key: key);
+  const Input({Key? key, required this.label, required this.placeholderTxt, required this.controller, required this.isPasswordField}) : super(key: key);
 
   final String label;
   final String placeholderTxt;
   final TextEditingController controller;
+  final bool isPasswordField;
 
 
   @override
@@ -24,7 +25,14 @@ class Input extends StatelessWidget {
         ),
         const SizedBox(height: 10,),
         TextFormField(
+          obscureText: isPasswordField,
           controller: controller,
+    validator: (value) {
+      if (value == null || value.isEmpty) {
+        return 'Please enter some text';
+      }
+      return null;
+    },
           decoration: InputDecoration(
             // prefixIcon: const Icon(Icons.person_2_outlined)
             hintText: placeholderTxt,

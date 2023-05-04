@@ -6,7 +6,7 @@ import '../screens/login/login_view.dart';
 import '../screens/signup/signup_view.dart';
 
 @StackedApp(routes: [
-  MaterialRoute(page: StartUpView),
+  MaterialRoute(page: StartUpView, ),
   MaterialRoute(page: LoginView),
   MaterialRoute(page: SignUpView),
 ],

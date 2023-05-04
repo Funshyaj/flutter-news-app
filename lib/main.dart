@@ -1,17 +1,20 @@
 import 'package:demo_app/app/app.locator.dart';
 import 'package:demo_app/app/app.router.dart';
-import 'package:demo_app/screens/login/login_view.dart';
-import 'package:demo_app/screens/startup/start_view.dart';
 import 'package:flutter/material.dart';
 import 'package:hive_flutter/hive_flutter.dart';
 import 'package:hive/hive.dart';
-import 'package:stacked/stacked_annotations.dart';
 import 'package:stacked_services/stacked_services.dart';
+import 'models/user.dart';
 
 
 
 void main() async {
   await Hive.initFlutter();
+  Hive.registerAdapter(UserModelAdapter());
+  //for other
+  Hive.openBox('otherData');
+  //for users
+  var usersBox = Hive.openBox<UserModel>('userdatabase');
   setupLocator();
 
   runApp(const MyApp());

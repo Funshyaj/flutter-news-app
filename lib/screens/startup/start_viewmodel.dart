@@ -12,17 +12,18 @@ class StartUpViewModel extends BaseViewModel {
   final _navigationService = locator<NavigationService>();
 
 
+  
   firstTimeLogic()async{
-   if(_authenticationService.userFirstTimeChecker()){
-     _navigationService.navigateTo(Routes.startUpView);
+   if(await _authenticationService.userFirstTimeChecker()){
+    return _navigationService.navigateTo(Routes.startUpView);
    }
    else {
-     _navigationService.navigateTo(Routes.loginView);
+    return _navigationService.navigateTo(Routes.loginView);
    }
   }
 
   navToSignUp(){
-    _authenticationService.setNonFirstTime();
+    // _authenticationService.setNonFirstTime();
     _navigationService.navigateTo(Routes.signUpView);
   }
 

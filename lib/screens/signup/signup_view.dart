@@ -10,10 +10,13 @@ import '../../custom components/input.dart';
 class SignUpView extends StatelessWidget {
   const SignUpView({Key? key}) : super(key: key);
 
+
+  // final _formKey = GlobalKey<FormState>();
+
   @override
   Widget build(BuildContext context) {
     return ViewModelBuilder<SignUpViewModel>.reactive(
-        // onViewModelReady: (model) => go(),
+        // onViewModelReady: (model)async => await model.test().then(),
         viewModelBuilder: ()=> SignUpViewModel(),
         builder: (context, model, child)=>Scaffold(
           body:       SingleChildScrollView(
@@ -37,14 +40,12 @@ class SignUpView extends StatelessWidget {
                     children: [
                       const Text('Have an account already?',
                         style: TextStyle(
-                            fontFamily: 'NunitoRegular',
                             fontSize: 18,
                             fontWeight: FontWeight.bold
                         ),),
                       const SizedBox(width: 5,),
                       TextButton(onPressed: (){
-
-
+                        model.navToLogin();
                       },
                           child: Text('Login',
                             style: TextStyle(
@@ -57,28 +58,34 @@ class SignUpView extends StatelessWidget {
                   ),
 
                   Form(
+                    // key: _formKey,
                     child: Column(
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
                          const SizedBox(height: 30),
                           Input(
+                            isPasswordField: false,
                             label:'Full name',
                           placeholderTxt: 'Enter your full name',
                           controller: model.fullnameController,),
 
                           Input(
+                            isPasswordField: false,
                             label:'Username',
                             placeholderTxt: 'Enter a unique username',
                             controller: model.usernameController,),
 
                           Input(
+                            isPasswordField: false,
                             label:'Email',
                             placeholderTxt: 'Enter your email',
                             controller: model.emailController,),
 
                           Input(
+                          isPasswordField: true,
                             label:'Password',
                             placeholderTxt: 'Set a password',
+
                             controller: model.passwordController,),
 
                           SizedBox(
@@ -86,9 +93,21 @@ class SignUpView extends StatelessWidget {
                             child: ElevatedButton(
                               onPressed: (){
                               model.signUp();
+                              // if (_formKey.currentState!.validate()) {
+                              //   // If the form is valid, display a snackbar. In the real world,
+                              //   // you'd often call a server or save the information in a database.
+                              //   ScaffoldMessenger.of(context).showSnackBar(
+                              //     const SnackBar(content: Text('Processing Data')),
+                              //   );
+                              // }
                               },
                               child: const Text('Sign up'),
                             ),
+                          ),
+
+                          TextButton(
+                              onPressed: ()=> model.test(),
+                          child: Text('dfs'),
                           ),
                         ]
                     ),
