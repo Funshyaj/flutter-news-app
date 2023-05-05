@@ -2,8 +2,8 @@ import 'package:demo_app/services/auth_service.dart';
 import 'package:stacked/stacked_annotations.dart';
 import 'package:demo_app/screens/welcome/welcome_view.dart';
 import 'package:stacked_services/stacked_services.dart';
-import '../screens/home/home_view.dart';
 import '../screens/login/login_view.dart';
+import '../screens/main/main_view.dart';
 import '../screens/signup/signup_view.dart';
 import '../screens/startup/startup_view.dart';
 import '../services/signup_services.dart';
@@ -15,7 +15,7 @@ import '../services/startup_services.dart';
   MaterialRoute(page: WelcomeView),
   MaterialRoute(page: LoginView),
   MaterialRoute(page: SignUpView),
-  MaterialRoute(page: HomeView),
+  MaterialRoute(page: MainView),
 ],
 
   //this is where you register any new services

@@ -18,6 +18,7 @@ class Data {
     );
   }
 }
+
 int run(int n){
   return n;
 }

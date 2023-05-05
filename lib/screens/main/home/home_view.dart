@@ -7,10 +7,12 @@ class HomeView extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return ViewModelBuilder<HomeViewModel>.reactive
-      (viewModelBuilder: () => HomeViewModel(),
+    return ViewModelBuilder<MainViewModel>.reactive
+      (viewModelBuilder: () => MainViewModel(),
+        onViewModelReady: (model) => model.fetch(),
+        fireOnViewModelReadyOnce: true,
         builder: (context, model, child) =>
-        const Scaffold(
+         const Scaffold(
             body:
             //recommended for you text
             Padding(
@@ -21,8 +23,9 @@ class HomeView extends StatelessWidget {
                     fontSize: 24,
                     fontFamily: 'NunitoBold'
                 ),),
-            )
-        )
-    );
+            ),
+
+          ),
+        );
   }
 }

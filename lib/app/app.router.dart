@@ -5,7 +5,7 @@
 // **************************************************************************
 
 // ignore_for_file: no_leading_underscores_for_library_prefixes
-import 'package:demo_app/screens/home/home_view.dart' as _i6;
+import 'package:demo_app/screens/main/home/home_view.dart' as _i6;
 import 'package:demo_app/screens/login/login_view.dart' as _i4;
 import 'package:demo_app/screens/signup/signup_view.dart' as _i5;
 import 'package:demo_app/screens/startup/startup_view.dart' as _i2;
