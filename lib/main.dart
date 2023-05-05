@@ -7,7 +7,6 @@ import 'package:stacked_services/stacked_services.dart';
 import 'models/user.dart';
 
 
-
 void main() async {
   await Hive.initFlutter();
   Hive.registerAdapter(UserModelAdapter());
