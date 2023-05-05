@@ -1,3 +1,4 @@
+import 'package:bot_toast/bot_toast.dart';
 import 'package:demo_app/screens/login/login_viewmodel.dart';
 import 'package:stacked/stacked.dart';
 import 'package:flutter/material.dart';
@@ -6,6 +7,13 @@ import '../../custom components/input.dart';
 
 class LoginView extends StackedView<LoginViewModel>{
 const LoginView({super.key});
+
+@override
+   onViewModelReady(LoginViewModel viewModel) {
+  if(viewModel.wrongPassword) {
+    BotToast.showSimpleNotification(title: "Wrong password");
+  }
+}
 
   @override
   Widget builder(
@@ -75,17 +83,25 @@ width: double.infinity,
 child: ElevatedButton(
 onPressed: (){
 viewModel.login();
-// if (_formKey.currentState!.validate()) {
-//   // If the form is valid, display a snackbar. In the real world,
-//   // you'd often call a server or save the information in a database.
-//   ScaffoldMessenger.of(context).showSnackBar(
-//     const SnackBar(content: Text('Processing Data')),
-//   );
+// if (_formKey.currentState!.validate()) {}
+  ScaffoldMessenger.of(context).showSnackBar(
+    const SnackBar(content: Text('Logging in'))
+  //      '${viewModel.wrongPassword ? "Logging in" : "welcome"}'
+  );
 // }
 },
 child: const Text('Login'),
 ),
 ),
+
+  if(viewModel.wrongPassword)
+  // BotToast.showSimpleNotification(title: "init");
+    SizedBox(
+    child: Text('Wrong password??? => ${viewModel.wrongPassword.toString()}'),
+)
+
+
+
 
 ]
 )

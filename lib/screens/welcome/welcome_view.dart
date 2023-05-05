@@ -1,16 +1,15 @@
+import 'package:demo_app/screens/welcome/welcome_viewmodel.dart';
 import 'package:stacked/stacked.dart';
-import 'package:demo_app/screens/startup/start_viewmodel.dart';
 import 'package:flutter/material.dart';
 
 
-class StartUpView extends StatelessWidget {
-  const StartUpView({Key? key}) : super(key: key);
+class WelcomeView extends StatelessWidget {
+  const WelcomeView({Key? key}) : super(key: key);
 
 @override
   Widget build(BuildContext context) {
-  return ViewModelBuilder<StartUpViewModel>.reactive(
-      viewModelBuilder: ()=> StartUpViewModel(),
-  // onViewModelReady: (model)=>  model.firstTimeLogic(),
+  return ViewModelBuilder<WelcomeViewModel>.reactive(
+      viewModelBuilder: ()=> WelcomeViewModel(),
   builder: (context, model, child)=>
   Scaffold(
 backgroundColor: Colors.white,

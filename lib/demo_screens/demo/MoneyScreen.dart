@@ -1,7 +1,8 @@
-import 'package:demo_app/custom%20components/box.dart';
-import 'package:demo_app/custom%20components/circle.dart';
+import 'package:demo_app/custom%20components/demo/box.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
+
+import '../../custom components/demo/circle.dart';
 
 class MoneyScreen  extends StatelessWidget {
   const MoneyScreen({super.key});

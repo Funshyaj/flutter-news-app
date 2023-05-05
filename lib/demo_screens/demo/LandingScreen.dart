@@ -1,5 +1,5 @@
-import 'package:demo_app/custom%20components/box.dart';
-import 'package:demo_app/custom%20components/spacers.dart';
+import 'package:demo_app/custom%20components/demo/box.dart';
+import 'package:demo_app/custom%20components/demo/spacers.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 

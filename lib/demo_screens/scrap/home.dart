@@ -37,7 +37,7 @@ class _HomeState extends State<Home> {
   //declare an array variable to keep the list of data from the server
   late List newsList;
   late int amountOfNews;
-int index = 0;
+int index = 1;
   @override
   void initState(){
     super.initState();

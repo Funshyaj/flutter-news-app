@@ -1,5 +1,4 @@
 import 'package:flutter/cupertino.dart';
-import 'package:hive/hive.dart';
 import 'package:stacked/stacked.dart';
 import 'package:stacked_services/stacked_services.dart';
 import '../../app/app.locator.dart';
@@ -14,29 +13,33 @@ class LoginViewModel extends BaseViewModel {
   final _authenticationService = locator<AuthenticationService>();
 
 
-  String title = 'not updated';
+  bool wrongPassword = false;
   TextEditingController username= TextEditingController();
   TextEditingController password = TextEditingController();
 
-  void doSomething() {
-    title += ' updated ';
-    // this will call the builder defined in the view file and rebuild the ui using
-    // the update version of the model.
-   rebuildUi();
-  }
-
-
   login(){
-    // print(username.text);
-    // print(password.text);
-    _authenticationService.login(username.text, password.text);
-  }
+    var result = _authenticationService.login(username.text, password.text);
+     if(!result) {
+       wrongPassword = true;
+     rebuildUi();
+     }
 
-  clear() async{
-    var box = await Hive.openBox('userDatabase');
-    // box.clear();
-    print('db is cleared');
-  }
+     else {
+       // _navigationService.navigateTo(Routes.welcomeView);
+       print('ready to take you to home page');
+       wrongPassword = false;
+       _navigationService.navigateTo(Routes.homeView);
+       rebuildUi();
+
+     }
+
+     }
+
+  // clear() async{
+  //   var box = await Hive.openBox('userDatabase');
+  //   // box.clear();
+  //   print('db is cleared');
+  // }
 
   void navToSignUp(){
     _navigationService.navigateTo(Routes.signUpView);

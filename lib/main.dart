@@ -1,8 +1,8 @@
+import 'package:bot_toast/bot_toast.dart';
 import 'package:demo_app/app/app.locator.dart';
 import 'package:demo_app/app/app.router.dart';
 import 'package:flutter/material.dart';
 import 'package:hive_flutter/hive_flutter.dart';
-import 'package:hive/hive.dart';
 import 'package:stacked_services/stacked_services.dart';
 import 'models/user.dart';
 
@@ -12,9 +12,9 @@ void main() async {
   await Hive.initFlutter();
   Hive.registerAdapter(UserModelAdapter());
   //for other
-  Hive.openBox('otherData');
+  await Hive.openBox('otherData');
   //for users
-  var usersBox = Hive.openBox<UserModel>('userdatabase');
+  await Hive.openBox<UserModel>('userdatabase');
   setupLocator();
 
   runApp(const MyApp());
@@ -34,8 +34,8 @@ class MyApp extends StatelessWidget {
       //theme of the app
       theme: ThemeData(
           //setting global theme for widgets in the app
-        fontFamily: 'Nunito',
           primarySwatch: Colors.indigo,
+        fontFamily: 'Nunito',
         inputDecorationTheme:  InputDecorationTheme(
           enabledBorder: OutlineInputBorder(
             borderSide: const BorderSide(
@@ -53,8 +53,7 @@ class MyApp extends StatelessWidget {
               padding: const EdgeInsets.symmetric(vertical: 12),
               textStyle: const TextStyle(fontSize: 20,
               fontWeight: FontWeight.bold,
-              letterSpacing: 1,
-              fontFamily: 'NunitoBold'),
+              letterSpacing: 1,),
               backgroundColor: Colors.indigo[800],
                 shape: RoundedRectangleBorder(
                     borderRadius: BorderRadius.circular(8)
@@ -62,9 +61,11 @@ class MyApp extends StatelessWidget {
             )
           ) ),
 
+      builder: BotToastInit(),
+      navigatorObservers: [BotToastNavigatorObserver()],
+
       //start up route
       initialRoute: Routes.startUpView,
-
      //dependencies for routes
      navigatorKey: StackedService.navigatorKey,
       onGenerateRoute:StackedRouter().onGenerateRoute,

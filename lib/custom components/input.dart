@@ -27,12 +27,12 @@ class Input extends StatelessWidget {
         TextFormField(
           obscureText: isPasswordField,
           controller: controller,
-    validator: (value) {
-      if (value == null || value.isEmpty) {
-        return 'Please enter some text';
-      }
-      return null;
-    },
+    // validator: (value) {
+    //   if (value == null || value.isEmpty) {
+    //     return 'Please enter some text';
+    //   }
+    //   return 'true';
+    // },
           decoration: InputDecoration(
             // prefixIcon: const Icon(Icons.person_2_outlined)
             hintText: placeholderTxt,

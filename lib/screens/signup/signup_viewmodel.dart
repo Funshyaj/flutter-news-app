@@ -1,63 +1,70 @@
-import 'dart:convert';
-
-import 'package:demo_app/models/user.dart';
+import 'package:bot_toast/bot_toast.dart';
+import 'package:demo_app/services/signup_services.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:hive/hive.dart';
 import 'package:stacked/stacked.dart';
 import 'package:stacked_services/stacked_services.dart';
 import '../../app/app.locator.dart';
 import '../../app/app.router.dart';
-import '../../services/auth_service.dart';
 
-
-class SignUpViewModel extends BaseViewModel{
-
-
+class SignUpViewModel extends BaseViewModel {
 
   //set up for navigation
   final _navigationService = locator<NavigationService>();
 
-//  set up for auth services
-  final _authenticationService = locator<AuthenticationService>();
+//  set up for signup service
+  final _signUpService = locator<SignUpService>();
 
 //creating a controllers
-TextEditingController fullnameController = TextEditingController();
-TextEditingController usernameController = TextEditingController();
-TextEditingController emailController = TextEditingController();
-TextEditingController passwordController = TextEditingController();
+  TextEditingController fullNameController = TextEditingController();
+  TextEditingController usernameController = TextEditingController();
+  TextEditingController emailController = TextEditingController();
+  TextEditingController passwordController = TextEditingController();
 
-test() async{
-   Box others = Hive.box('otherData');
-
-   bool firstTime = await others.get('firstTime', defaultValue: true);
-print(firstTime.toString());
-
-  Box users = Hive.box<UserModel>('userdatabase');
-print(users.containsKey('Funshy'));
-}
+//create form key
+  final formKey = GlobalKey<FormState>();
 
 
+//set up for toasts
 
-signUp()async{
-//  extra validation
-if((fullnameController.text != '') && (usernameController.text != '') && (emailController.text != '')
-    && (passwordController.text != '') ) {
-  print('ready to save user');
-  print(passwordController.text);
+  var cancel = BotToast.showLoading();
+
+
+  test() async {
+    Box others = Hive.box('otherData');
+
+    bool firstTime = await others.get('firstTime', defaultValue: true);
+    print('Is it my first time => $firstTime');
+
+    // Box users = Hive.box<UserModel>('userdatabase');
+// print(users.containsKey('Funshy'));
+  }
+
+
+  signUp() {
+
 //  passing the user input to the services
-await _authenticationService.signUpLogic(fullnameController.text,
-    usernameController.text,
-    emailController.text,
-    passwordController.text);
-print('user saved');
-    }
-else{
-  print('Fill all info');
-}
+   bool result =  _signUpService.signUpLogic(
+          fullNameController.text,
+          usernameController.text,
+          emailController.text,
+          passwordController.text);
+
+
+   if(result){
+     //close loading modal
+    cancel();
+     print('user has been saved successfully');
+     _navigationService.navigateTo(Routes.homeView);
+   }
+
+
+  //set user first time to false
+  // _signUpService.setNonFirstTime();
 
 
 
-}
+  }
 
 
 void navToLogin(){

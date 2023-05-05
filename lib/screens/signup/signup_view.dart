@@ -1,23 +1,19 @@
+import 'package:bot_toast/bot_toast.dart';
 import 'package:demo_app/screens/signup/signup_viewmodel.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/src/widgets/framework.dart';
 import 'package:stacked/stacked.dart';
-import 'package:stacked/stacked_annotations.dart';
-
 import '../../custom components/input.dart';
 
 
 class SignUpView extends StatelessWidget {
-  const SignUpView({Key? key}) : super(key: key);
+   const SignUpView({Key? key}) : super(key: key);
 
-
-  // final _formKey = GlobalKey<FormState>();
 
   @override
   Widget build(BuildContext context) {
     return ViewModelBuilder<SignUpViewModel>.reactive(
-        // onViewModelReady: (model)async => await model.test().then(),
         viewModelBuilder: ()=> SignUpViewModel(),
+        onViewModelReady: (model)=> model.cancel(),
         builder: (context, model, child)=>Scaffold(
           body:       SingleChildScrollView(
             child: Container(
@@ -29,7 +25,6 @@ class SignUpView extends StatelessWidget {
                   const SizedBox(height: 20,),
                   const Text('Sign up',
                     style: TextStyle(
-                        fontFamily: 'NunitoRegular',
                         fontSize: 28,
                         fontWeight: FontWeight.bold,
                         color: Colors.black
@@ -38,7 +33,7 @@ class SignUpView extends StatelessWidget {
 
                   Row(
                     children: [
-                      const Text('Have an account already?',
+                      const Text('Already Have an account ?',
                         style: TextStyle(
                             fontSize: 18,
                             fontWeight: FontWeight.bold
@@ -49,7 +44,6 @@ class SignUpView extends StatelessWidget {
                       },
                           child: Text('Login',
                             style: TextStyle(
-                                fontFamily: 'NunitoRegular',
                                 fontSize: 18,
                                 fontWeight: FontWeight.bold,
                                 color:Colors.indigo[800] ),))
@@ -58,7 +52,7 @@ class SignUpView extends StatelessWidget {
                   ),
 
                   Form(
-                    // key: _formKey,
+                    key: model.formKey,
                     child: Column(
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
@@ -67,7 +61,7 @@ class SignUpView extends StatelessWidget {
                             isPasswordField: false,
                             label:'Full name',
                           placeholderTxt: 'Enter your full name',
-                          controller: model.fullnameController,),
+                          controller: model.fullNameController,),
 
                           Input(
                             isPasswordField: false,
@@ -85,29 +79,53 @@ class SignUpView extends StatelessWidget {
                           isPasswordField: true,
                             label:'Password',
                             placeholderTxt: 'Set a password',
-
                             controller: model.passwordController,),
 
                           SizedBox(
                             width: double.infinity,
                             child: ElevatedButton(
                               onPressed: (){
-                              model.signUp();
-                              // if (_formKey.currentState!.validate()) {
-                              //   // If the form is valid, display a snackbar. In the real world,
-                              //   // you'd often call a server or save the information in a database.
-                              //   ScaffoldMessenger.of(context).showSnackBar(
-                              //     const SnackBar(content: Text('Processing Data')),
-                              //   );
-                              // }
-                              },
+                                // if fields are not empty
+                                if ((model.fullNameController.text != '') &&
+                                        (model.usernameController.text != '') &&
+                                        (model.emailController.text != '') &&
+                                        (model.passwordController.text != '')) {
+
+                                  //run sign up
+                                      model.signUp();
+
+                                      //display a processing snack bar
+                                      BotToast.showLoading(
+                                        duration: const Duration(seconds: 4)
+                                      );
+
+
+                                // ScaffoldMessenger.of(context).showSnackBar(
+                                //         const SnackBar(
+                                //             content: Text(
+                                //                 'Creating Account, hold on')),
+                                //       );
+                                    }
+
+                                else{
+                                  BotToast.showSimpleNotification(
+                                    title: "Kindly fill all the fields correctly",
+                                    subTitle: 'now!!!',
+                                    align: const Alignment(0, -0.8),
+                                    duration: const Duration(seconds: 5),
+                                  );
+                                }
+                                  },
                               child: const Text('Sign up'),
                             ),
                           ),
 
                           TextButton(
-                              onPressed: ()=> model.test(),
-                          child: Text('dfs'),
+                              onPressed: ()=>
+                              model.test(),
+
+                                  // BotToast.showLoading(),
+                          child: const Text('dfs'),
                           ),
                         ]
                     ),
