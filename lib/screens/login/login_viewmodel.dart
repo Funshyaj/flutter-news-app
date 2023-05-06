@@ -1,4 +1,5 @@
 import 'package:flutter/cupertino.dart';
+import 'package:flutter/material.dart';
 import 'package:stacked/stacked.dart';
 import 'package:stacked_services/stacked_services.dart';
 import '../../app/app.locator.dart';
@@ -28,12 +29,32 @@ class LoginViewModel extends BaseViewModel {
        // _navigationService.navigateTo(Routes.welcomeView);
        print('ready to take you to home page');
        wrongPassword = false;
-       _navigationService.navigateTo(Routes.homeView);
+       username.clear();
+       password.clear();
        rebuildUi();
-
+       _navigationService.clearStackAndShow(Routes.mainView);
      }
 
      }
+
+
+  getLoginResult(context , viewModel) {
+    if(viewModel.wrongPassword){
+      return ScaffoldMessenger.of(context).showSnackBar(
+          const SnackBar(content:Text('Wrong Password')
+          )
+        // '${viewModel.wrongPassword ? "Logging in" : "welcome"}'
+      );
+    }
+    else {
+      return ScaffoldMessenger.of(context).showSnackBar(
+          const SnackBar(content:Text('Welcome')
+          )
+        // '${viewModel.wrongPassword ? "Logging in" : "welcome"}'
+      );
+    }
+
+  }
 
   // clear() async{
   //   var box = await Hive.openBox('userDatabase');

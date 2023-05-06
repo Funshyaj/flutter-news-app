@@ -10,11 +10,21 @@ class ProfileView extends StatelessWidget {
   Widget build(BuildContext context) {
     return ViewModelBuilder<ProfileViewModel>.reactive(
         viewModelBuilder: ()=> ProfileViewModel(),
-        builder:(context, model ,child)=> const Scaffold(
-          body: Center(
-            child:
-            Text('test')
-          ),
-        ));
+        builder:(context, model ,child)=>  Scaffold(
+          body: SingleChildScrollView(
+            child: Container(
+              margin: const EdgeInsets.only(top: 20),
+              padding: const EdgeInsets.all(10),
+              width: double.infinity,
+              child: Column(
+                mainAxisAlignment: MainAxisAlignment.center,
+                crossAxisAlignment: CrossAxisAlignment.center,
+                children: const [
+                  Text('profile page'),
+                  Text('profile page'),
+                ],
+              ),
+            ),
+          )));
   }
 }

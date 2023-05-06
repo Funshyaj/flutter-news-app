@@ -54,14 +54,14 @@ class SignUpViewModel extends BaseViewModel {
    if(result){
      //close loading modal
     cancel();
+    _navigationService.clearStackAndShow(Routes.mainView);
      print('user has been saved successfully');
-     _navigationService.navigateTo(Routes.homeView);
    }
 
 
   //set user first time to false
+  //  when user signs up its not their first time anymore
   // _signUpService.setNonFirstTime();
-
 
 
   }

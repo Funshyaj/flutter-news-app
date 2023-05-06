@@ -120,13 +120,13 @@ class SignUpView extends StatelessWidget {
                             ),
                           ),
 
-                          TextButton(
-                              onPressed: ()=>
-                              model.test(),
-
-                                  // BotToast.showLoading(),
-                          child: const Text('dfs'),
-                          ),
+                          // TextButton(
+                          //     onPressed: ()=>
+                          //     model.test(),
+                          //
+                          //         // BotToast.showLoading(),
+                          // child: const Text('dfs'),
+                          // ),
                         ]
                     ),
                   ),

@@ -5,8 +5,8 @@
 // **************************************************************************
 
 // ignore_for_file: no_leading_underscores_for_library_prefixes
-import 'package:demo_app/screens/main/home/home_view.dart' as _i6;
 import 'package:demo_app/screens/login/login_view.dart' as _i4;
+import 'package:demo_app/screens/main/main_view.dart' as _i6;
 import 'package:demo_app/screens/signup/signup_view.dart' as _i5;
 import 'package:demo_app/screens/startup/startup_view.dart' as _i2;
 import 'package:demo_app/screens/welcome/welcome_view.dart' as _i3;
@@ -24,14 +24,14 @@ class Routes {
 
   static const signUpView = '/sign-up-view';
 
-  static const homeView = '/home-view';
+  static const mainView = '/main-view';
 
   static const all = <String>{
     startUpView,
     welcomeView,
     loginView,
     signUpView,
-    homeView,
+    mainView,
   };
 }
 
@@ -54,8 +54,8 @@ class StackedRouter extends _i1.RouterBase {
       page: _i5.SignUpView,
     ),
     _i1.RouteDef(
-      Routes.homeView,
-      page: _i6.HomeView,
+      Routes.mainView,
+      page: _i6.MainView,
     ),
   ];
 
@@ -84,9 +84,9 @@ class StackedRouter extends _i1.RouterBase {
         settings: data,
       );
     },
-    _i6.HomeView: (data) {
+    _i6.MainView: (data) {
       return _i7.MaterialPageRoute<dynamic>(
-        builder: (context) => const _i6.HomeView(),
+        builder: (context) => const _i6.MainView(),
         settings: data,
       );
     },
@@ -155,14 +155,14 @@ extension NavigatorStateExtension on _i8.NavigationService {
         transition: transition);
   }
 
-  Future<dynamic> navigateToHomeView([
+  Future<dynamic> navigateToMainView([
     int? routerId,
     bool preventDuplicates = true,
     Map<String, String>? parameters,
     Widget Function(BuildContext, Animation<double>, Animation<double>, Widget)?
         transition,
   ]) async {
-    return navigateTo<dynamic>(Routes.homeView,
+    return navigateTo<dynamic>(Routes.mainView,
         id: routerId,
         preventDuplicates: preventDuplicates,
         parameters: parameters,
@@ -225,14 +225,14 @@ extension NavigatorStateExtension on _i8.NavigationService {
         transition: transition);
   }
 
-  Future<dynamic> replaceWithHomeView([
+  Future<dynamic> replaceWithMainView([
     int? routerId,
     bool preventDuplicates = true,
     Map<String, String>? parameters,
     Widget Function(BuildContext, Animation<double>, Animation<double>, Widget)?
         transition,
   ]) async {
-    return replaceWith<dynamic>(Routes.homeView,
+    return replaceWith<dynamic>(Routes.mainView,
         id: routerId,
         preventDuplicates: preventDuplicates,
         parameters: parameters,

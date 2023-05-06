@@ -15,6 +15,7 @@ const LoginView({super.key});
   }
 }
 
+
   @override
   Widget builder(
       BuildContext context,
@@ -77,30 +78,18 @@ label:'Password',
 placeholderTxt: 'Enter your password',
 controller: viewModel.password),
 
-
+//Submit button
 SizedBox(
 width: double.infinity,
 child: ElevatedButton(
 onPressed: (){
 viewModel.login();
-// if (_formKey.currentState!.validate()) {}
-  ScaffoldMessenger.of(context).showSnackBar(
-    const SnackBar(content: Text('Logging in'))
-  //      '${viewModel.wrongPassword ? "Logging in" : "welcome"}'
-  );
+viewModel.getLoginResult(context, viewModel);
 // }
 },
 child: const Text('Login'),
 ),
 ),
-
-  if(viewModel.wrongPassword)
-  // BotToast.showSimpleNotification(title: "init");
-    SizedBox(
-    child: Text('Wrong password??? => ${viewModel.wrongPassword.toString()}'),
-)
-
-
 
 
 ]
@@ -115,5 +104,7 @@ child: const Text('Login'),
 
   @override
   LoginViewModel viewModelBuilder (BuildContext context)=> LoginViewModel();
+
+
 }
 
