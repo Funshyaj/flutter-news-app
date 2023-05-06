@@ -7,8 +7,8 @@ class HomeView extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return ViewModelBuilder<MainViewModel>.reactive
-      (viewModelBuilder: () => MainViewModel(),
+    return ViewModelBuilder<HomeViewModel>.reactive
+      (viewModelBuilder: () => HomeViewModel(),
         onViewModelReady: (model) => model.fetch(),
         fireOnViewModelReadyOnce: true,
         builder: (context, model, child) =>
@@ -21,7 +21,6 @@ class HomeView extends StatelessWidget {
                 style: TextStyle(
                     fontWeight: FontWeight.bold,
                     fontSize: 24,
-                    fontFamily: 'NunitoBold'
                 ),),
             ),
 

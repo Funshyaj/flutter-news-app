@@ -3,7 +3,7 @@ import 'package:stacked/stacked.dart';
 import 'package:stacked_services/stacked_services.dart';
 import '../../app/app.locator.dart';
 import '../../app/app.router.dart';
-import '../../services/auth_service.dart';
+import '../../services/auth_services.dart';
 
 class LoginViewModel extends BaseViewModel {
   //set up for navigation

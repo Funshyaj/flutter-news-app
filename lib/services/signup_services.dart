@@ -21,7 +21,6 @@ class SignUpServiceImpl extends SignUpService {
             password: password));
 
     //letting me know its done saving and ready to navigate
-
       return true;
 
   }

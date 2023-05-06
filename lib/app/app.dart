@@ -1,4 +1,4 @@
-import 'package:demo_app/services/auth_service.dart';
+import 'package:demo_app/services/auth_services.dart';
 import 'package:stacked/stacked_annotations.dart';
 import 'package:demo_app/screens/welcome/welcome_view.dart';
 import 'package:stacked_services/stacked_services.dart';

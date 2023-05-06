@@ -1,6 +1,6 @@
-import 'package:demo_app/screens/login/login_view.dart';
-import 'package:demo_app/screens/signup/signup_view.dart';
-import 'package:demo_app/screens/startup/startup_view.dart';
+import 'package:demo_app/screens/main/explore/explore_view.dart';
+import 'package:demo_app/screens/main/home/home_view.dart';
+import 'package:demo_app/screens/main/profile/profile_view.dart';
 import 'package:flutter/material.dart';
 import 'package:stacked/stacked.dart';
 import 'main_viewmodel.dart';
@@ -52,13 +52,13 @@ class MainView extends StatelessWidget {
 Widget viewToDisplay (int index){
 switch (index) {
   case 0:
-    return const StartUpView();
+    return const HomeView();
   case 1:
-    return const LoginView();
+    return const ExploreView();
   case 2:
-    return const  SignUpView();
+    return const  ProfileView();
     default:
-      return const StartUpView();
+      return const HomeView();
 }
 }
 
