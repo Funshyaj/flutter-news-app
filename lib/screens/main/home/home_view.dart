@@ -1,4 +1,3 @@
-import 'package:demo_app/app/app.locator.dart';
 import 'package:flutter/material.dart';
 import 'package:stacked/stacked.dart';
 import 'home_viewmodel.dart';
@@ -11,8 +10,7 @@ class HomeView extends StatelessWidget {
     return ViewModelBuilder<HomeViewModel>.reactive(
       disposeViewModel: false,
       initialiseSpecialViewModelsOnce: true,
-      onViewModelReady: (model)=> model.initialise(),
-      viewModelBuilder: () => locator<HomeViewModel>(),
+      viewModelBuilder: () => HomeViewModel(),
         builder: (context, model, child) =>
           Scaffold(
              body:model.isBusy ?

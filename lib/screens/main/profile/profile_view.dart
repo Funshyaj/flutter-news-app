@@ -10,6 +10,9 @@ class ProfileView extends StatelessWidget {
   Widget build(BuildContext context) {
     return ViewModelBuilder<ProfileViewModel>.reactive(
         viewModelBuilder: ()=> ProfileViewModel(),
+        onViewModelReady: (model)=>model.fetchUserInfo(),
+        disposeViewModel: false,
+        fireOnViewModelReadyOnce: true,
         builder:(context, model ,child)=>  Scaffold(
           body: SingleChildScrollView(
             child: Container(
@@ -19,9 +22,10 @@ class ProfileView extends StatelessWidget {
               child: Column(
                 mainAxisAlignment: MainAxisAlignment.center,
                 crossAxisAlignment: CrossAxisAlignment.center,
-                children: const [
-                  Text('profile page'),
-                  Text('profile page'),
+                children: [
+                  Text(model.fullName),
+                  Text(model.email),
+                  Text(model.username)
                 ],
               ),
             ),

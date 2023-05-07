@@ -20,8 +20,12 @@ class SignUpServiceImpl extends SignUpService {
             email: email,
             password: password));
 
+    // setting the current user
+     box.put('currentUser', username);
     //letting me know its done saving and ready to navigate
       return true;
+
+
 
   }
 

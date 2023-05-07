@@ -22,6 +22,7 @@ print('passowrd is => $password0');
 
     if(username0==username && password0==password){
       print('correct and ready to login');
+      box.put('currentUser', username0);
       return true;
     }
     else{
