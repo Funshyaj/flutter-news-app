@@ -17,6 +17,7 @@ class HomeView extends StatelessWidget {
              Center(
                child: Column(
                  mainAxisSize: MainAxisSize.max,
+                 crossAxisAlignment: CrossAxisAlignment.center,
                  children: <Widget>[
                    CircularProgressIndicator(
                      valueColor: AlwaysStoppedAnimation(Colors.purple[200]),
@@ -39,7 +40,6 @@ class HomeView extends StatelessWidget {
                        style: TextStyle(
                            fontWeight: FontWeight.bold,
                            fontSize: 24,
-                           fontFamily: 'NunitoBold'
                        ),),
                    ),
                    ListView.separated(
