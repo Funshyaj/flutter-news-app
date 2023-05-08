@@ -1,7 +1,10 @@
 import 'dart:convert';
+import 'package:demo_app/services/api_servies.dart';
 import 'package:dio/dio.dart';
 
+import '../app/app.locator.dart';
 import '../models/post.dart';
+import '../models/ss.dart';
 
 abstract class FetchPostService {
   fetchPosts();
@@ -9,27 +12,17 @@ abstract class FetchPostService {
 
 class FetchPostServiceImpl extends FetchPostService  {
 
-  //setting up api end point
-  static const endPoint = 'https://newsapi.org/v2/top-headlines?sources=techcrunch&apiKey=2b8f4f5e4195450c87a0ceeaf519d557';
-  //create an instance for dio
-  final dio = Dio();
+  final _api = locator<ApiService>();
 
+  late List<Article> _posts;
+  List<Article> get posts => _posts;
+
+  bool get hasPosts => _posts != null && _posts.isNotEmpty;
 
   @override
- // Future<List<Post>>
-  fetchPosts() async{
-   var posts = <Post>[];
-   List pos;
-
-   //making network request...
-  var res = await dio.get(endPoint);
-   pos = res.data['articles'] as List;
-     var parsed = json.decode(res.data['articles']) as List<dynamic>;
-     for (var post in parsed){
-       posts.add(Post.fromJson(post));
-     }
-return pos;
-
+ Future<List<Article>>fetchPosts() async{
+    _posts = await _api.getPosts();
+    return _posts;
   }
 
 

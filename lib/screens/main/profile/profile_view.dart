@@ -14,6 +14,29 @@ class ProfileView extends StatelessWidget {
         disposeViewModel: false,
         fireOnViewModelReadyOnce: true,
         builder:(context, model ,child)=>  Scaffold(
+          appBar:AppBar(titleSpacing: 40,
+            backgroundColor: Colors.red,
+          title: Text(model.username),),
+          // drawerEnableOpenDragGesture: true,
+          // extendBodyBehindAppBar: true,
+          drawer: Container(
+            decoration: BoxDecoration(
+              color: Colors.red,
+            ),
+            margin: const EdgeInsets.only(top: 20),
+            padding: const EdgeInsets.all(10),
+            width: double.infinity,
+            child: Column(
+              mainAxisAlignment: MainAxisAlignment.center,
+              crossAxisAlignment: CrossAxisAlignment.center,
+              children: [
+                Text(model.fullName),
+                Text(model.email),
+                Text(model.username)
+              ],
+            ),
+          ),
+          drawerEdgeDragWidth: 70,
           body: SingleChildScrollView(
             child: Container(
               margin: const EdgeInsets.only(top: 20),

@@ -10,7 +10,8 @@ class StartUpView extends StatelessWidget {
     return ViewModelBuilder<StartUpViewModel>.reactive(
       onViewModelReady: (model)=> model.firstTimeLogic(),
       fireOnViewModelReadyOnce: true,
-      builder:(context,model,child)=> const Scaffold(
+      builder:(context,model,child)=>  const Scaffold(
+        backgroundColor: Colors.red,
         body: Center(
           child: Text('Welcome'),
         ),

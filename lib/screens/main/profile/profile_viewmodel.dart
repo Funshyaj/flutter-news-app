@@ -18,7 +18,7 @@ late String email;
  fetchUserInfo(){
     String currentUser = box.get('currentUser');
     UserModel userDetails = users.get(currentUser);
-    username = userDetails.password;
+    username = userDetails.userName;
     fullName = userDetails.fullName;
     email = userDetails.email;
   }

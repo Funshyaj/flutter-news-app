@@ -1,3 +1,4 @@
+import 'package:demo_app/services/api_servies.dart';
 import 'package:demo_app/services/auth_services.dart';
 import 'package:demo_app/services/fetch_post_services.dart';
 import 'package:stacked/stacked_annotations.dart';
@@ -26,6 +27,7 @@ import '../services/startup_services.dart';
     LazySingleton(classType: SignUpServiceImpl, asType: SignUpService),
     LazySingleton(classType: StartUpServiceImpl, asType: StartUpService),
     LazySingleton(classType: FetchPostServiceImpl, asType: FetchPostService),
+    LazySingleton(classType: ApiServiceImpl ,asType: ApiService),
   ]
 )
 class AppSetup {}
