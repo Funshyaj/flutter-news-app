@@ -9,13 +9,11 @@ class HomeViewModel extends FutureViewModel<List<Article>>{
 //  setting up services
 final _fetchPostServices = locator<FetchPostService>();
 
-// String name = 'funsho';
-
 
 @override
   Future<List<Article>> futureToRun()async{
 
-return await _fetchPostServices.fetchPosts();
+return await _fetchPostServices.fetchBusinessPosts();
 
 }
 

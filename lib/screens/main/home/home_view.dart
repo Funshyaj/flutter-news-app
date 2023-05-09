@@ -1,4 +1,4 @@
-import 'package:demo_app/custom%20components/post_card.dart';
+import 'package:demo_app/custom%20components/home_post_card.dart';
 import 'package:demo_app/models/post.dart';
 import 'package:flutter/material.dart';
 import 'package:stacked/stacked.dart';
@@ -19,23 +19,11 @@ class HomeView extends StatelessWidget {
           Scaffold(
              body:model.isBusy ?
              Center(
-               child: Column(
-                 mainAxisSize: MainAxisSize.max,
-                 crossAxisAlignment: CrossAxisAlignment.center,
-                 children: <Widget>[
-                   CircularProgressIndicator(
-                     valueColor: AlwaysStoppedAnimation(Colors.purple[200]),
-                   ),
-                   const Text(
-                     'Loading Posts',
-                     style: TextStyle(color: Colors.white),
-                   )
-                 ],
+               child: CircularProgressIndicator(
+                 valueColor: AlwaysStoppedAnimation(Colors.indigo[200]),
                ),
              )
              : !model.hasError ?
-             // SingleChildScrollView(
-             //   child:
              SingleChildScrollView(
                child: Column(
                  crossAxisAlignment: CrossAxisAlignment.start,
@@ -63,6 +51,7 @@ class HomeView extends StatelessWidget {
                          //this is what will be the separator among the mapped items
                          separatorBuilder: (context, index)=> const SizedBox(height: 10,),
                          itemCount: 3/*model.data?.length??0*/,
+                         physics: const BouncingScrollPhysics(),
                        itemBuilder: (context,index) {
                          Article article = model.data![index];
                          return PostCard(
@@ -88,8 +77,9 @@ class HomeView extends StatelessWidget {
                          //this is what will be the separator among the mapped items
                          separatorBuilder: (context, index)=> const SizedBox(height: 10,),
                          itemCount: 3/*model.data?.length??0*/,
+                         physics: const BouncingScrollPhysics(),
                          itemBuilder: (context,index) {
-                           Article article = model.data![index];
+                           Article article = model.data![index+3];
                            return PostCard(
                                article.author,
                                article.title,
@@ -110,9 +100,24 @@ class HomeView extends StatelessWidget {
                          ),),
                      ),
 
-            // model.data!.map((e){ return  Text('2').toList();
-
-
+                     ListView.separated(
+                         shrinkWrap: true,
+                         // key: const PageStorageKey('storage-key'),
+                         //this is what will be the separator among the mapped items
+                         separatorBuilder: (context, index)=> const SizedBox(height: 10,),
+                         itemCount: 3/*model.data?.length??0*/,
+                         physics: const BouncingScrollPhysics(),
+                         itemBuilder: (context,index) {
+                           Article article = model.data![index+6];
+                           return PostCard(
+                               article.author,
+                               article.title,
+                               article.description,
+                               article.url,
+                               article.urlToImage,
+                               article.publishedAt.toString(),
+                               article.content);
+                         }),
 
 
                    ],
