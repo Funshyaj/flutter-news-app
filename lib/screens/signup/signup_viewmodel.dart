@@ -46,7 +46,7 @@ class SignUpViewModel extends BaseViewModel {
 //  passing the user input to the services
    bool result =  _signUpService.signUpLogic(
           fullNameController.text,
-          usernameController.text,
+          usernameController.text.toLowerCase(),
           emailController.text,
           passwordController.text);
 
@@ -61,7 +61,7 @@ class SignUpViewModel extends BaseViewModel {
 
   //set user first time to false
   //  when user signs up its not their first time anymore
-  // _signUpService.setNonFirstTime();
+  _signUpService.setNonFirstTime();
 
 
   }

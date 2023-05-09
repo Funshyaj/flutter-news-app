@@ -18,8 +18,8 @@ class LoginViewModel extends BaseViewModel {
   TextEditingController username= TextEditingController();
   TextEditingController password = TextEditingController();
 
-  login(){
-    var result = _authenticationService.login(username.text, password.text);
+  login()async{
+    var result = _authenticationService.login(username.text.toLowerCase(), password.text);
      if(!result) {
        wrongPassword = true;
      rebuildUi();

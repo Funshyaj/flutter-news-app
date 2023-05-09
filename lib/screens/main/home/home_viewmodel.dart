@@ -1,4 +1,4 @@
-import 'package:demo_app/models/ss.dart';
+import 'package:demo_app/models/bPost.dart';
 import 'package:demo_app/services/fetch_post_services.dart';
 import 'package:stacked/stacked.dart';
 import '../../../app/app.locator.dart';
@@ -14,7 +14,8 @@ final _fetchPostServices = locator<FetchPostService>();
 
 @override
   Future<List<Article>> futureToRun()async{
-return _fetchPostServices.fetchPosts();
+
+return await _fetchPostServices.fetchPosts();
 
 }
 

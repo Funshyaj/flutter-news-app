@@ -4,7 +4,7 @@ import 'package:dio/dio.dart';
 
 import '../app/app.locator.dart';
 import '../models/post.dart';
-import '../models/ss.dart';
+import '../models/bPost.dart';
 
 abstract class FetchPostService {
   fetchPosts();
