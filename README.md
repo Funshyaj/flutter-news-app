@@ -1,5 +1,5 @@
 
-## Getting 
+## Getting Started
  This project is a demo news app which consumes api from news.api
 
 ## Run Locally

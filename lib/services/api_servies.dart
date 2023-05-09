@@ -1,5 +1,4 @@
 import 'package:dio/dio.dart';
-import '../models/post.dart';
 import '../models/bPost.dart';
 import '../models/sPost.dart';
 
@@ -14,7 +13,6 @@ class ApiServiceImpl extends ApiService{
   static const businessNewsApi = 'https://newsapi.org/v2/top-headlines?country=us&category=business&apiKey=2b8f4f5e4195450c87a0ceeaf519d557';
   static const startUpNewsApi = 'https://newsapi.org/v2/everything?q=startup&apiKey=2b8f4f5e4195450c87a0ceeaf519d557';
 
-  // static const endPoint = 'https://newsapi.org/v2/top-headlines?sources=techcrunch&apiKey=2b8f4f5e4195450c87a0ceeaf519d557';
   //create an instance for dio
   final dio = Dio();
 
@@ -25,12 +23,8 @@ class ApiServiceImpl extends ApiService{
     var posts = <Article>[];
     //making network request...
     var res = await dio.get(businessNewsApi);
-    // var res = await dio.get(endPoint);
-    // posts = Post.fromJson(res.data).articles;
     posts = Bpost.fromJson(res.data).articles;
-
     return posts;
-
   }
 
   @override

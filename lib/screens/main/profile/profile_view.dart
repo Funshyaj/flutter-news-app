@@ -84,7 +84,7 @@ SizedBox(height: 10,),
 
                         DeetsRow(icon: Icons.email,
                             text: model.email,
-                            themeColor: Colors.yellowAccent.shade100),
+                            themeColor: Colors.indigoAccent.shade400),
 
                         DeetsRow(icon: Icons.settings,
                             text: 'Settings',

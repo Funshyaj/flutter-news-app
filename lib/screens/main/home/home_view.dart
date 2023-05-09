@@ -1,5 +1,4 @@
 import 'package:demo_app/custom%20components/home_post_card.dart';
-import 'package:demo_app/models/post.dart';
 import 'package:flutter/material.dart';
 import 'package:stacked/stacked.dart';
 import '../../../custom components/padded.dart';
