@@ -1,16 +1,33 @@
 # demo_app
-
-A new Flutter project.
+New app
 
 ## Getting Started
+ This project is a demo news app which consumes api from news.api
 
-This project is a starting point for a Flutter application.
+## Run Locally
 
-A few resources to get you started if this is your first Flutter project:
+Clone the project
 
-- [Lab: Write your first Flutter app](https://docs.flutter.dev/get-started/codelab)
-- [Cookbook: Useful Flutter samples](https://docs.flutter.dev/cookbook)
+```bash
+  git clone https://github.com/funshyaj/flutter-news-app
+```
 
-For help getting started with Flutter development, view the
-[online documentation](https://docs.flutter.dev/), which offers tutorials,
-samples, guidance on mobile development, and a full API reference.
+Go to the project directory
+
+```bash
+  cd my-project
+```
+
+Install dependencies
+
+If youre using Andriod studio
+```bash
+  open pubspec.yaml and get dependencies
+```
+
+Start the server
+
+```bash
+  run app in Andriod emulator
+```
+
