@@ -51,6 +51,9 @@ dependencies:
   #toast alerts
   bot_toast:
 
+  #responsiveness
+  responsive_builder:
+
 dev_dependencies:
   flutter_test:
     sdk: flutter

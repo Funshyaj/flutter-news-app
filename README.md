@@ -18,7 +18,7 @@ Go to the project directory
 
 Install dependencies
 
-If youre using Andriod studio
+If your using Android studio
 ```bash
   open pubspec.yaml and get dependencies
 ```

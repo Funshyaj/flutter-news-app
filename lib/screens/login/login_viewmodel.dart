@@ -13,21 +13,34 @@ class LoginViewModel extends BaseViewModel {
   final _authenticationService = locator<AuthenticationService>();
 
 
-  bool wrongPassword = false;
+  String authMessage = '';
   TextEditingController username= TextEditingController();
   TextEditingController password = TextEditingController();
 
-  login()async{
-    var result = _authenticationService.login(username.text.toLowerCase(), password.text);
-     if(!result) {
-       wrongPassword = true;
+  login(BuildContext context)async{
+
+    //validation for empty entries
+    if(username.text == '' && password.text == ''){
+      return ScaffoldMessenger.of(context).showSnackBar(
+          const SnackBar(content:Text('Enter your details to login')
+          )
+      );
+    }
+
+    //wrong user name or no username
+    var result = await _authenticationService.login(username.text, password.text);
+     if(result == 'user does not exist') {
+       authMessage = result;
      rebuildUi();
      }
-
+     //wrong password
+     else if (result == 'wrong password'){
+       authMessage = result;
+       rebuildUi();
+     }
+     //ready to login
      else {
-       // _navigationService.navigateTo(Routes.welcomeView);
-       print('ready to take you to home page');
-       wrongPassword = false;
+       authMessage = result;
        username.clear();
        password.clear();
        rebuildUi();
@@ -38,19 +51,22 @@ class LoginViewModel extends BaseViewModel {
 
 
   getLoginResult(context , viewModel) {
-    if(viewModel.wrongPassword){
+    if(viewModel.authMessage == 'user does not exist'){
       return ScaffoldMessenger.of(context).showSnackBar(
-          const SnackBar(content:Text('Wrong Password')
+           SnackBar(content:Text(viewModel.authMessage)
           )
-        // '${viewModel.wrongPassword ? "Logging in" : "welcome"}'
       );
     }
-    else {
+
+    else if (viewModel.authMessage == 'Wrong password'){
       return ScaffoldMessenger.of(context).showSnackBar(
-          const SnackBar(content:Text('Welcome')
+           SnackBar(content:Text(viewModel.authMessage)
           )
-        // '${viewModel.wrongPassword ? "Logging in" : "welcome"}'
       );
+    }
+
+    else{
+      authMessage == viewModel.authMessage;
     }
 
   }

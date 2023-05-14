@@ -13,17 +13,18 @@ class ExploreView extends StatelessWidget {
   Widget build(BuildContext context) {
     return ViewModelBuilder<ExploreViewModel>.reactive
       (viewModelBuilder: () => ExploreViewModel(),
+        onViewModelReady: (model)=> model.getDiffPosts(),
         disposeViewModel: false,
-        initialiseSpecialViewModelsOnce: true,
+
       builder: (context, model, child) =>
       Scaffold(
-        body:model.isBusy ?
+        body: model.startUpPosts.isEmpty ?
         Center(
           child: CircularProgressIndicator(
             valueColor: AlwaysStoppedAnimation(Colors.indigo[200]),
           ),
         )
-            : !model.hasError ?
+            : model.startUpPosts.isNotEmpty ?
         SingleChildScrollView(
               child: Container(
                 margin: const EdgeInsets.only(top: 20),
@@ -32,8 +33,8 @@ class ExploreView extends StatelessWidget {
                   crossAxisAlignment: CrossAxisAlignment.start,
                   mainAxisAlignment: MainAxisAlignment.start,
                   children: [
-                    Padded(
-                      widget: Text('StartUps news',
+                    const Padded(
+                      widget: Text('Business news',
                         style: TextStyle(
                           fontWeight: FontWeight.bold,
                           fontSize: 24,
@@ -45,11 +46,11 @@ class ExploreView extends StatelessWidget {
                         key: const PageStorageKey('storage-key'),
                         //this is what will be the separator among the mapped items
                         separatorBuilder: (context, index)=> const SizedBox(height: 10,),
-                        itemCount: 10/*model.data?.length??0*/,
+                        itemCount: 10,
                         physics: const BouncingScrollPhysics(),
                         itemBuilder: (context,index) {
-                          StartUpArticle article = model.data![index];
-                          return ePostCard(
+                          var article = model.businessPosts[index];
+                          return PostCard(
                               article.author,
                               article.title,
                               article.description,
@@ -57,10 +58,11 @@ class ExploreView extends StatelessWidget {
                               article.urlToImage,
                               article.publishedAt.toString(),
                               article.content);
+
                         }),
 
                     const Padded(
-                      widget: Text('Tech news',
+                      widget: Text('News on start ups',
                         style: TextStyle(
                           fontWeight: FontWeight.bold,
                           fontSize: 24,
@@ -69,13 +71,14 @@ class ExploreView extends StatelessWidget {
 
                     ListView.separated(
                         shrinkWrap: true,
-                        // key: const PageStorageKey('storage-key'),
+                        // key: const PageStorageKey('storage-key1'),
                         //this is what will be the separator among the mapped items
                         separatorBuilder: (context, index)=> const SizedBox(height: 10,),
-                        itemCount: 10/*model.data?.length??0*/,
+                        itemCount: 10,
+                        key: const PageStorageKey('storage-key1'),
                         physics: const BouncingScrollPhysics(),
                         itemBuilder: (context,index) {
-                          StartUpArticle article = model.data![index+11];
+                          StartUpArticle article = model.startUpPosts[index];
                           return ePostCard(
                               article.author,
                               article.title,
@@ -84,10 +87,37 @@ class ExploreView extends StatelessWidget {
                               article.urlToImage,
                               article.publishedAt.toString(),
                               article.content);
+
                         }),
 
+                    const Padded(
+                      widget: Text('More on start ups',
+                        style: TextStyle(
+                          fontWeight: FontWeight.bold,
+                          fontSize: 24,
+                        ),),
+                    ),
 
+                    ListView.separated(
+                        shrinkWrap: true,
+                        // key: const PageStorageKey('storage-key1'),
+                        //this is what will be the separator among the mapped items
+                        separatorBuilder: (context, index)=> const SizedBox(height: 10,),
+                        itemCount: 10,
+                        key: const PageStorageKey('storage-key2'),
+                        physics: const BouncingScrollPhysics(),
+                        itemBuilder: (context,index) {
+                          StartUpArticle article = model.startUpPosts[index+11];
+                          return ePostCard(
+                              article.author,
+                              article.title,
+                              article.description,
+                              article.url,
+                              article.urlToImage,
+                              article.publishedAt.toString(),
+                              article.content);
 
+                        }),
                   ],
                 ),
               ),

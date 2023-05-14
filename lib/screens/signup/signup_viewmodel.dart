@@ -1,7 +1,6 @@
 import 'package:bot_toast/bot_toast.dart';
 import 'package:demo_app/services/signup_services.dart';
 import 'package:flutter/cupertino.dart';
-import 'package:hive/hive.dart';
 import 'package:stacked/stacked.dart';
 import 'package:stacked_services/stacked_services.dart';
 import '../../app/app.locator.dart';
@@ -26,19 +25,15 @@ class SignUpViewModel extends BaseViewModel {
 
 
 //set up for toasts
-
   var cancel = BotToast.showLoading();
 
 
-  test() async {
-    Box others = Hive.box('otherData');
-
-    bool firstTime = await others.get('firstTime', defaultValue: true);
-    print('Is it my first time => $firstTime');
-
-    // Box users = Hive.box<UserModel>('userdatabase');
-// print(users.containsKey('Funshy'));
-  }
+  // test() async {
+  //   Box others = Hive.box('otherData');
+  //
+  //   // bool firstTime = await others.get('firstTime', defaultValue: true);
+  //   // print('Is it my first time => $firstTime');
+  // }
 
 
   signUp() {
@@ -62,8 +57,6 @@ class SignUpViewModel extends BaseViewModel {
   //set user first time to false
   //  when user signs up its not their first time anymore
   _signUpService.setNonFirstTime();
-
-
   }
 
 

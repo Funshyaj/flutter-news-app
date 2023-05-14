@@ -14,7 +14,7 @@ class StartUpViewModel extends BaseViewModel {
 
 
   firstTimeLogic() async {
-    // run checker from service
+    // // run checker from service
     if (await _startUpService.userFirstTimeChecker()) {
       //navigate to welcome if the value for firstTime is true
       return _navigationService.navigateTo(Routes.welcomeView);

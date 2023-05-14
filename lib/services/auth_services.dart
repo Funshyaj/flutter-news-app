@@ -14,21 +14,23 @@ class AuthenticationServiceImpl extends AuthenticationService {
   @override
   login(username, password) {
 
-    //getting the username and password from the database
+    if (users.containsKey(username) == false){
+      return 'user does not exist';
+    }
+
+    //getting the username and password from the database when there is a username
     String username0 = users.get(username).userName;
     String password0 = users.get(username).password;
 
-print('passowrd is => $password0');
-
-    if(username0==username && password0==password){
-      print('correct and ready to login');
+   if(username0==username && password0==password){
       box.put('currentUser', username0);
-      return true;
+      return 'Welcome';
     }
-    else{
-      print('incorrect password');
-      return false;
+
+    else {
+      return 'Wrong password';
     }
+
   }
 
 }

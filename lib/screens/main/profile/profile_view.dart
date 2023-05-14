@@ -1,5 +1,3 @@
-import 'dart:math';
-
 import 'package:demo_app/custom%20components/profile_deets_row.dart';
 import 'package:demo_app/screens/main/profile/profile_viewmodel.dart';
 import 'package:flutter/material.dart';
@@ -16,8 +14,8 @@ class ProfileView extends StatelessWidget {
     return ViewModelBuilder<ProfileViewModel>.reactive(
         viewModelBuilder: ()=> ProfileViewModel(),
         onViewModelReady: (model)=>model.fetchUserInfo(),
-        disposeViewModel: false,
-        fireOnViewModelReadyOnce: true,
+        // disposeViewModel: false,
+        // initialiseSpecialViewModelsOnce: true,
         builder:(context, model ,child)=>  Scaffold(
           backgroundColor: Colors.indigo[50],
           drawer: Container(
@@ -44,19 +42,19 @@ class ProfileView extends StatelessWidget {
               child: Column(
                 children: [
 Container(
-  padding: EdgeInsets.only(top:40),
+  padding: const EdgeInsets.only(top:40),
   height: height * 0.4,
   child: Column(
     mainAxisAlignment: MainAxisAlignment.center,
     crossAxisAlignment: CrossAxisAlignment.center,
     children:[
       Container(
-        padding:EdgeInsets.all(10),
+        padding: const EdgeInsets.all(10),
         decoration: BoxDecoration(
           color: Colors.indigo[100],
-              borderRadius: BorderRadius.all(Radius.circular(100),)),
+              borderRadius: const BorderRadius.all(Radius.circular(100),)),
         child: Icon(Icons.person_outline,size: 120,color: Colors.indigo[800],),),
-SizedBox(height: 10,),
+ const SizedBox(height: 10,),
   Text(model.username,
     style: TextStyle(fontWeight: FontWeight.bold,
         color: Colors.indigo[900],

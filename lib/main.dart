@@ -3,6 +3,7 @@ import 'package:demo_app/app/app.locator.dart';
 import 'package:demo_app/app/app.router.dart';
 import 'package:flutter/material.dart';
 import 'package:hive_flutter/hive_flutter.dart';
+import 'package:responsive_builder/responsive_builder.dart';
 import 'package:stacked_services/stacked_services.dart';
 import 'models/user.dart';
 
@@ -16,6 +17,9 @@ void main() async {
   await Hive.openBox<UserModel>('userdatabase');
   setupLocator();
 
+  ResponsiveSizingConfig.instance.setCustomBreakpoints(
+    const ScreenBreakpoints(desktop: 800, tablet: 550, watch: 200),
+  );
   runApp(const MyApp());
 }
 
