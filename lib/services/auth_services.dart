@@ -12,15 +12,15 @@ class AuthenticationServiceImpl extends AuthenticationService {
 
 
   @override
-  login(username, password) {
+  login(username, password) async{
 
     if (users.containsKey(username) == false){
       return 'user does not exist';
     }
 
     //getting the username and password from the database when there is a username
-    String username0 = users.get(username).userName;
-    String password0 = users.get(username).password;
+    String username0 = await users.get(username).userName;
+    String password0 = await users.get(username).password;
 
    if(username0==username && password0==password){
       box.put('currentUser', username0);

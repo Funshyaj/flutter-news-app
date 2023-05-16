@@ -36,11 +36,11 @@ class ProfileView extends StatelessWidget {
             ),
           ),
           drawerEdgeDragWidth: 70,
-          body: SingleChildScrollView(
-            child: Container(
-              width: double.infinity,
-              child: Column(
-                children: [
+          body: SizedBox(
+            width: double.infinity,
+            height: height,
+            child: Column(
+              children: [
 Container(
   padding: const EdgeInsets.only(top:40),
   height: height * 0.4,
@@ -52,7 +52,7 @@ Container(
         padding: const EdgeInsets.all(10),
         decoration: BoxDecoration(
           color: Colors.indigo[100],
-              borderRadius: const BorderRadius.all(Radius.circular(100),)),
+            borderRadius: const BorderRadius.all(Radius.circular(100),)),
         child: Icon(Icons.person_outline,size: 120,color: Colors.indigo[800],),),
  const SizedBox(height: 10,),
   Text(model.username,
@@ -62,50 +62,48 @@ Container(
   ])),
 
 
-                  const SizedBox(height: 20,),
+                const SizedBox(height: 20,),
 
 
-                  Container(
-                    height: height * 0.49,
-                    decoration: const BoxDecoration(
-                      color: Colors.white,
-                      borderRadius: BorderRadius.only(
-                          topLeft: Radius.circular(50),
-                          topRight: Radius.circular(50))
-                    ),
-                    padding: const EdgeInsets.only(top: 50 , bottom: 0,left: 40,right: 40),
-                    child: Column(
-                      children: [
-                        DeetsRow(icon: Icons.person_rounded,
-                            text: model.fullName,
-                            themeColor: Colors.indigoAccent.shade100,),
+                Container(
+                  decoration: const BoxDecoration(
+                    color: Colors.white,
+                    borderRadius: BorderRadius.only(
+                        topLeft: Radius.circular(50),
+                        topRight: Radius.circular(50))
+                  ),
+                  padding: const EdgeInsets.only(top: 50 , bottom: 0,left: 40,right: 40),
+                  child: Column(
+                    children: [
+                      DeetsRow(icon: Icons.person_rounded,
+                          text: model.fullName,
+                          themeColor: Colors.indigoAccent.shade100,),
 
-                        DeetsRow(icon: Icons.email,
-                            text: model.email,
-                            themeColor: Colors.indigoAccent.shade400),
+                      DeetsRow(icon: Icons.email,
+                          text: model.email,
+                          themeColor: Colors.indigoAccent.shade400),
 
-                        DeetsRow(icon: Icons.settings,
-                            text: 'Settings',
-                            themeColor: Colors.blueAccent.shade100),
+                      DeetsRow(icon: Icons.settings,
+                          text: 'Settings',
+                          themeColor: Colors.blueAccent.shade100),
 
-                        GestureDetector(
-                          onTap: (){
-                            model.logOut();
-                          },
-                          child: DeetsRow(icon: Icons.logout,
-                              text: 'Logout',
-                              themeColor: Colors.redAccent.shade100),
-                        ),
-
-
-                      ],
-                    ),
+                      GestureDetector(
+                        onTap: (){
+                          model.logOut();
+                        },
+                        child: DeetsRow(icon: Icons.logout,
+                            text: 'Logout',
+                            themeColor: Colors.redAccent.shade100),
+                      ),
 
 
+                    ],
                   ),
 
-                ],
-              ),
+
+                ),
+
+              ],
             ),
           )));
   }

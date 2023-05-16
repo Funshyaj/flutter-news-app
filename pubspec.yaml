@@ -105,12 +105,6 @@ flutter:
        - asset: assets/fonts/static/Nunito-Regular.ttf
          weight: 400
 
-  #  fonts:
-#    - family: Nunito
-#      fonts:
-#        - asset: assets/fonts/Raleway-Regular.ttf
-#        - asset: fonts/Raleway-Italic.ttf
-#          style: italic
 
   # For details regarding fonts from package dependencies,
   # see https://flutter.dev/custom-fonts/#from-packages

@@ -1,6 +1,6 @@
 import 'package:bot_toast/bot_toast.dart';
 import 'package:demo_app/services/signup_services.dart';
-import 'package:flutter/cupertino.dart';
+import 'package:flutter/material.dart';
 import 'package:stacked/stacked.dart';
 import 'package:stacked_services/stacked_services.dart';
 import '../../app/app.locator.dart';
@@ -36,7 +36,7 @@ class SignUpViewModel extends BaseViewModel {
   // }
 
 
-  signUp() {
+  signUp(context) async{
 
 //  passing the user input to the services
    bool result =  _signUpService.signUpLogic(
@@ -49,8 +49,12 @@ class SignUpViewModel extends BaseViewModel {
    if(result){
      //close loading modal
     cancel();
-    _navigationService.clearStackAndShow(Routes.mainView);
+    await _navigationService.clearStackAndShow(Routes.mainView);
      print('user has been saved successfully');
+    ScaffoldMessenger.of(context).showSnackBar(
+        const SnackBar(content:Text('Account successfully created, Welcome')
+        )
+    );
    }
 
 

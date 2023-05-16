@@ -24,125 +24,137 @@ class SignUpView extends StatelessWidget {
           builder: (context, model, child) =>
               Scaffold(
                 body: SingleChildScrollView(
-                  child: Container(
-                    margin: const EdgeInsets.only(top: 60),
-                    padding: const EdgeInsets.all(30),
-                    width: getValueForScreenType<double>(
-                      context: context,
-                      mobile: width,
-                      tablet: 0.6,
-                      desktop: width * 0.4,
-                    ),
-                    child: Column(
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      children: [
-                        const SizedBox(height: 20,),
-                        const Text('Sign up',
-                          style: TextStyle(
-                              fontSize: 28,
-                              fontWeight: FontWeight.bold,
-                              color: Colors.black
-                          ),),
-                        const SizedBox(height: 5,),
+                  child: Center(
+                    child: Container(
+                      margin: const EdgeInsets.only(top: 60),
+                      padding: const EdgeInsets.all(30),
+                      width: getValueForScreenType<double>(
+                        context: context,
+                        mobile: width,
+                        tablet: width * 0.6,
+                        desktop: width * 0.4,
+                      ),
+                      child: Column(
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: [
+                          const SizedBox(height: 20,),
+                          const Text('Sign up',
+                            style: TextStyle(
+                                fontSize: 28,
+                                fontWeight: FontWeight.bold,
+                                color: Colors.black
+                            ),),
+                          const SizedBox(height: 5,),
 
-                        Row(
-                          children: [
-                            const Text('Already Have an account ?',
-                              style: TextStyle(
-                                  fontSize: 18,
-                                  fontWeight: FontWeight.bold
-                              ),),
-                            const SizedBox(width: 5,),
-                            TextButton(onPressed: () {
-                              model.navToLogin();
-                            },
-                                child: Text('Login',
-                                  style: TextStyle(
-                                      fontSize: 18,
-                                      fontWeight: FontWeight.bold,
-                                      color: Colors.indigo[800]),))
-
-                          ],
-                        ),
-
-                        Form(
-                          key: model.formKey,
-                          child: Column(
-                              crossAxisAlignment: CrossAxisAlignment.start,
-                              children: [
-                                const SizedBox(height: 30),
-                                Input(
-                                  isPasswordField: false,
-                                  label: 'Full name',
-                                  placeholderTxt: 'Enter your full name',
-                                  controller: model.fullNameController,),
-
-                                Input(
-                                  isPasswordField: false,
-                                  label: 'Username',
-                                  placeholderTxt: 'Enter a unique username',
-                                  controller: model.usernameController,),
-
-                                Input(
-                                  isPasswordField: false,
-                                  label: 'Email',
-                                  placeholderTxt: 'Enter your email',
-                                  controller: model.emailController,),
-
-                                Input(
-                                  isPasswordField: true,
-                                  label: 'Password',
-                                  placeholderTxt: 'Set a password',
-                                  controller: model.passwordController,),
-
-                                SizedBox(
-                                  width: double.infinity,
-                                  child: ElevatedButton(
-                                    style: ButtonStyle(
-                                      padding: MaterialStateProperty.all(const EdgeInsets.symmetric(vertical: 20))
+                          Row(
+                            children: [
+                               Text('Already Have an account ?',
+                                style: TextStyle(
+                                    fontSize: getValueForScreenType<double>(
+                                      context: context,
+                                      mobile: 16,
+                                      tablet: 18,
+                                      desktop: 20,
                                     ),
-                                    onPressed: () {
-                                      // if fields are not empty
-                                      if ((model.fullNameController.text !=
-                                          '') &&
-                                          (model.usernameController.text !=
-                                              '') &&
-                                          (model.emailController.text != '') &&
-                                          (model.passwordController.text !=
-                                              '')) {
-                                        //run sign up
-                                        model.signUp();
+                                    fontWeight: FontWeight.bold
+                                ),),
+                              const SizedBox(width: 5,),
+                              TextButton(onPressed: () {
+                                model.navToLogin();
+                              },
+                                  child: Text('Login',
+                                    style: TextStyle(
+                                        fontSize: getValueForScreenType<double>(
+                                          context: context,
+                                          mobile: 16,
+                                          tablet: 18,
+                                          desktop: 20,
+                                        ),
+                                        fontWeight: FontWeight.bold,
+                                        color: Colors.indigo[800]),))
 
-                                        //display a processing snack bar
-                                        BotToast.showLoading(
-                                            duration: const Duration(seconds: 4)
-                                        );
-                                      }
-
-                                      else {
-                                        BotToast.showSimpleNotification(
-                                          title: "Kindly fill all the fields correctly",
-                                          subTitle: 'now!!!',
-                                          align: const Alignment(0, -0.8),
-                                          duration: const Duration(seconds: 5),
-                                        );
-                                      }
-                                    },
-                                    child: const Text('Sign up'),
-                                  ),
-                                ),
-
-                                // TextButton(
-                                //     onPressed: ()=>
-                                //     model.test(),
-                                //
-                                //         // BotToast.showLoading(),
-                                // child: const Text('dfs'),
-                                // ),
-                              ]
+                            ],
                           ),
-                        ),
-                      ],
+
+                          Form(
+                            key: model.formKey,
+                            child: Column(
+                                crossAxisAlignment: CrossAxisAlignment.start,
+                                children: [
+                                  const SizedBox(height: 30),
+                                  Input(
+                                    isPasswordField: false,
+                                    label: 'Full name',
+                                    placeholderTxt: 'Enter your full name',
+                                    controller: model.fullNameController,),
+
+                                  Input(
+                                    isPasswordField: false,
+                                    label: 'Username',
+                                    placeholderTxt: 'Enter a unique username',
+                                    controller: model.usernameController,),
+
+                                  Input(
+                                    isPasswordField: false,
+                                    label: 'Email',
+                                    placeholderTxt: 'Enter your email',
+                                    controller: model.emailController,),
+
+                                  Input(
+                                    isPasswordField: true,
+                                    label: 'Password',
+                                    placeholderTxt: 'Set a password',
+                                    controller: model.passwordController,),
+
+                                  SizedBox(
+                                    width: double.infinity,
+                                    child: ElevatedButton(
+                                      style: ButtonStyle(
+                                        padding: MaterialStateProperty.all(const EdgeInsets.symmetric(vertical: 20))
+                                      ),
+                                      onPressed: () {
+                                        // if fields are not empty
+                                        if ((model.fullNameController.text !=
+                                            '') &&
+                                            (model.usernameController.text !=
+                                                '') &&
+                                            (model.emailController.text != '') &&
+                                            (model.passwordController.text !=
+                                                '')) {
+                                          //run sign up
+                                          model.signUp(context);
+
+                                          //display a processing snack bar
+                                          BotToast.showLoading(
+                                              duration: const Duration(seconds: 4)
+                                          );
+                                        }
+
+                                        else {
+                                          BotToast.showSimpleNotification(
+                                            title: "Kindly fill all the fields correctly",
+                                            subTitle: 'now!!!',
+                                            align: const Alignment(0, -0.8),
+                                            duration: const Duration(seconds: 5),
+                                          );
+                                        }
+                                      },
+                                      child: const Text('Sign up'),
+                                    ),
+                                  ),
+
+                                  // TextButton(
+                                  //     onPressed: ()=>
+                                  //     model.test(),
+                                  //
+                                  //         // BotToast.showLoading(),
+                                  // child: const Text('dfs'),
+                                  // ),
+                                ]
+                            ),
+                          ),
+                        ],
+                      ),
                     ),
                   ),
                 ),

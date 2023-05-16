@@ -27,8 +27,9 @@ class LoginViewModel extends BaseViewModel {
       );
     }
 
-    //wrong user name or no username
+
     var result = await _authenticationService.login(username.text, password.text);
+    //wrong user name
      if(result == 'user does not exist') {
        authMessage = result;
      rebuildUi();
@@ -65,8 +66,11 @@ class LoginViewModel extends BaseViewModel {
       );
     }
 
-    else{
-      authMessage == viewModel.authMessage;
+    else if (viewModel.authMessage == 'Welcome'){
+      return ScaffoldMessenger.of(context).showSnackBar(
+          SnackBar(content:Text(viewModel.authMessage)
+          )
+      );
     }
 
   }

@@ -6,6 +6,7 @@ import 'package:hive_flutter/hive_flutter.dart';
 import 'package:responsive_builder/responsive_builder.dart';
 import 'package:stacked_services/stacked_services.dart';
 import 'models/user.dart';
+import 'package:google_fonts/google_fonts.dart';
 
 
 void main() async {
@@ -29,6 +30,8 @@ class MyApp extends StatelessWidget {
   // This widget is the root of your application.
   @override
   Widget build(BuildContext context) {
+    final textTheme = Theme.of(context).textTheme;
+
     return MaterialApp(
       //to deactivate thr debug banner
       debugShowCheckedModeBanner: false,
@@ -38,7 +41,7 @@ class MyApp extends StatelessWidget {
       theme: ThemeData(
           //setting global theme for widgets in the app
           primarySwatch: Colors.indigo,
-        fontFamily: 'Nunito',
+          textTheme: GoogleFonts.nunitoTextTheme(textTheme),
         inputDecorationTheme:  InputDecorationTheme(
           enabledBorder: OutlineInputBorder(
             borderSide: const BorderSide(

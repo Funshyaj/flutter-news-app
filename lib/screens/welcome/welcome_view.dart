@@ -129,7 +129,7 @@ class WelcomeView extends StatelessWidget {
                                   style:
                                   TextStyle(
                                     fontSize: 32.0,
-                                    fontWeight: FontWeight.bold,
+                                    fontWeight: FontWeight.w800,
                                     letterSpacing: 2,
                                     color: Colors.black,
                                     decoration: TextDecoration.none,
