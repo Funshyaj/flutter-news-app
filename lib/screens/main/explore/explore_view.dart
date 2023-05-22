@@ -18,13 +18,13 @@ class ExploreView extends StatelessWidget {
 
       builder: (context, model, child) =>
       Scaffold(
-        body: model.startUpPosts.isEmpty ?
+        body: model.startUpPosts.isEmpty && model.businessPosts.isEmpty ?
         Center(
           child: CircularProgressIndicator(
             valueColor: AlwaysStoppedAnimation(Colors.indigo[200]),
           ),
         )
-            : model.startUpPosts.isNotEmpty ?
+            : model.startUpPosts.isNotEmpty && model.businessPosts.isNotEmpty ?
         SingleChildScrollView(
               child: Container(
                 margin: const EdgeInsets.only(top: 20),
