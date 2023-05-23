@@ -69,9 +69,6 @@ class MyApp extends StatelessWidget {
 
       builder: BotToastInit(),
       navigatorObservers: [BotToastNavigatorObserver()],
-
-      //start up route
-      initialRoute: Routes.startUpView,
      //dependencies for routes
      navigatorKey: StackedService.navigatorKey,
       onGenerateRoute:StackedRouter().onGenerateRoute,

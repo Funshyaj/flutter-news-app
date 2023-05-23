@@ -2,7 +2,7 @@ import 'package:hive/hive.dart';
 import '../models/user.dart';
 
 abstract class AuthenticationService {
-  login(username, password);
+  Future<String> login(String username, String password);
 }
 
 class AuthenticationServiceImpl extends AuthenticationService {
@@ -12,10 +12,10 @@ class AuthenticationServiceImpl extends AuthenticationService {
 
 
   @override
-  login(username, password) async{
+  Future<String> login(String username, String password) async{
 
     if (users.containsKey(username) == false){
-      return 'user does not exist';
+      return 'User does not exist';
     }
 
     //getting the username and password from the database when there is a username
@@ -23,15 +23,12 @@ class AuthenticationServiceImpl extends AuthenticationService {
     String password0 = await users.get(username).password;
 
    if(username0==username && password0==password){
-      box.put('currentUser', username0);
-      return 'Welcome';
+      await box.put('currentUser', username0);
+      return 'Welcome $username0';
     }
-
     else {
       return 'Wrong password';
     }
-
   }
-
 }
 

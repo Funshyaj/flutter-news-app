@@ -23,49 +23,47 @@ class SignUpViewModel extends BaseViewModel {
 //create form key
   final formKey = GlobalKey<FormState>();
 
-
-//set up for toasts
-  var cancel = BotToast.showLoading();
-
-
-  // test() async {
-  //   Box others = Hive.box('otherData');
-  //
-  //   // bool firstTime = await others.get('firstTime', defaultValue: true);
-  //   // print('Is it my first time => $firstTime');
-  // }
+  //set isPending state
+  bool isPending = false;
 
 
-  signUp(context) async{
-
+  signUp() async{
+    isPending = true;
+    notifyListeners();
 //  passing the user input to the services
-   bool result =  _signUpService.signUpLogic(
+   bool result = await _signUpService.signUpLogic(
           fullNameController.text,
           usernameController.text.toLowerCase(),
           emailController.text,
           passwordController.text);
 
-
    if(result){
-     //close loading modal
-    cancel();
-    await _navigationService.clearStackAndShow(Routes.mainView);
-     print('user has been saved successfully');
-    ScaffoldMessenger.of(context).showSnackBar(
-        const SnackBar(content:Text('Account successfully created, Welcome')
-        )
+    BotToast.showSimpleNotification(
+      title: "Account successfully created",
+      align: const Alignment(0, -0.8),
+      duration: const Duration(seconds: 4),
     );
+   isPending = false;
+    notifyListeners();
+    //set user first time to false
+    //  when user signs up its not their first time anymore
+    await _signUpService.setNonFirstTime();
+    await _navigationService.clearStackAndShow(Routes.mainView);
    }
-
-
-  //set user first time to false
-  //  when user signs up its not their first time anymore
-  _signUpService.setNonFirstTime();
+   else if(!result){
+     BotToast.showSimpleNotification(
+       title: "Something went wrong, try again",
+       align: const Alignment(0, -0.8),
+       duration: const Duration(seconds: 4),
+     );
+     isPending = false;
+     notifyListeners();
+   }
   }
 
 
-void navToLogin(){
-  _navigationService.navigateTo(Routes.loginView);
+navToLogin() async {
+  await _navigationService.navigateTo(Routes.loginView);
 }
 
 

@@ -34,9 +34,7 @@ class ApiServiceImpl extends ApiService{
     var res = await dio.get(startUpNewsApi);
     // breaking posts down
     posts = Spost.fromJson(res.data).articles;
-
     return posts;
-
   }
 
 

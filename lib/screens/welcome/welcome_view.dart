@@ -24,8 +24,6 @@ class WelcomeView extends StatelessWidget {
                         children: <Widget>[
                           Expanded(
                             child: Container(
-// decoration: BoxDecoration(color: Colors.red),
-// padding: const EdgeInsets.only(top: 20),
                               margin: const EdgeInsets.only(
                                   top: 20, left: 10, right: 10, bottom: 10),
                               width: double.infinity,
@@ -37,9 +35,7 @@ class WelcomeView extends StatelessWidget {
                                         "assets/images/welcome.jpg"),
                                     fit: BoxFit.cover),
                               ),
-// Image(
-//   image: const AssetImage('assets/images/welcome.jpg'),height:size.height,width:size.height,
-// ),
+
                             ),
                           ),
                           Container(
@@ -100,8 +96,6 @@ class WelcomeView extends StatelessWidget {
                       children: <Widget>[
                         Expanded(
                           child: Container(
-// decoration: BoxDecoration(color: Colors.red),
-// padding: const EdgeInsets.only(top: 20),
                             margin: const EdgeInsets.only(
                                 top: 20, left: 10, right: 10, bottom: 10),
                             width: double.infinity,
@@ -113,11 +107,9 @@ class WelcomeView extends StatelessWidget {
                                       "assets/images/welcome.jpg"),
                                   fit: BoxFit.cover),
                             ),
-// Image(
-//   image: const AssetImage('assets/images/welcome.jpg'),height:size.height,width:size.height,
-// ),
                           ),
                         ),
+
                         Container(
                           padding: const EdgeInsets.only(
                               top: 5, bottom: 20, left: 10, right: 10),

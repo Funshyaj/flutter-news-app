@@ -3,6 +3,7 @@ import 'package:demo_app/models/sPost.dart';
 import 'package:flutter/material.dart';
 import 'package:stacked/stacked.dart';
 import '../../../custom components/explore_post_card.dart';
+import '../../../custom components/headerText.dart';
 import '../../../custom components/padded.dart';
 import 'explore_viewmodel.dart';
 
@@ -34,13 +35,9 @@ class ExploreView extends StatelessWidget {
                   mainAxisAlignment: MainAxisAlignment.start,
                   children: [
                     const Padded(
-                      widget: Text('Business news',
-                        style: TextStyle(
-                          fontWeight: FontWeight.bold,
-                          fontSize: 24,
-                        ),),
+                      widget: HeaderText(text: "Business News"),
                     ),
-                    //
+
                     ListView.separated(
                         shrinkWrap: true,
                         key: const PageStorageKey('storage-key'),
@@ -58,15 +55,10 @@ class ExploreView extends StatelessWidget {
                               article.urlToImage,
                               article.publishedAt.toString(),
                               article.content);
-
                         }),
 
                     const Padded(
-                      widget: Text('News on start ups',
-                        style: TextStyle(
-                          fontWeight: FontWeight.bold,
-                          fontSize: 24,
-                        ),),
+                      widget: HeaderText(text: "News on Start ups"),
                     ),
 
                     ListView.separated(
@@ -90,13 +82,9 @@ class ExploreView extends StatelessWidget {
 
                         }),
 
-                    const Padded(
-                      widget: Text('More on start ups',
-                        style: TextStyle(
-                          fontWeight: FontWeight.bold,
-                          fontSize: 24,
-                        ),),
-                    ),
+          const Padded(
+            widget: HeaderText(text: "More on start ups"),
+          ),
 
                     ListView.separated(
                         shrinkWrap: true,

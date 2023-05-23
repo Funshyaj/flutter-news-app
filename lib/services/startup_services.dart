@@ -1,7 +1,7 @@
 import 'package:hive/hive.dart';
 
 abstract class StartUpService {
-  userFirstTimeChecker();
+ Future<bool> userFirstTimeChecker();
 }
 
 class StartUpServiceImpl extends StartUpService {
@@ -9,11 +9,9 @@ class StartUpServiceImpl extends StartUpService {
   Box box = Hive.box('otherData');
 
   @override
-  userFirstTimeChecker() async{
-    bool firstTime =  box.get('firstTime', defaultValue: true);
+  Future<bool>  userFirstTimeChecker() async{
+    bool firstTime = await box.get('firstTime', defaultValue: true);
     return firstTime ;
   }
-
-
 }
 

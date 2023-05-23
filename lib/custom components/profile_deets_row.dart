@@ -1,17 +1,20 @@
 import 'package:flutter/cupertino.dart';
 
 class DeetsRow extends StatelessWidget {
-  const DeetsRow({Key? key, required this.icon, required this.text, required this.themeColor}) : super(key: key);
+  const DeetsRow({Key? key, required this.icon, required this.text, required this.themeColor, required this.addPaddingBottom}) : super(key: key);
 
   final IconData icon;
   final String text;
   final Color? themeColor;
+  final bool addPaddingBottom;
 
 
   @override
   Widget build(BuildContext context) {
     return Padding(
-      padding: const EdgeInsets.only(bottom: 50.0),
+   padding: EdgeInsets.only(bottom:
+    addPaddingBottom? 50.0: 2.0
+   ),
       child: Row(children: [
         Icon(icon,
           size: 40,
@@ -26,6 +29,7 @@ class DeetsRow extends StatelessWidget {
       ]),
     );
   }
+
 }
 
 

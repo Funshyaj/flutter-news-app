@@ -1,7 +1,6 @@
 import 'package:demo_app/screens/startup/startup_viewmodel.dart';
 import 'package:flutter/material.dart';
 import 'package:stacked/stacked.dart';
-import 'package:responsive_builder/responsive_builder.dart';
 
 
 class StartUpView extends StatelessWidget {
@@ -22,7 +21,7 @@ class StartUpView extends StatelessWidget {
                       children: [
                         Icon(Icons.description, color: Colors.indigo[800],
                           size: 80,),
-                        const Text('Newsly',
+                        const Text('News Daily',
                           style: TextStyle(
                               fontSize: 40,
                               fontWeight: FontWeight.bold

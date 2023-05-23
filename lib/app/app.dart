@@ -13,7 +13,7 @@ import '../services/startup_services.dart';
 
 //this is where you register routes
 @StackedApp(routes: [
-  MaterialRoute(page: StartUpView),
+  MaterialRoute(page: StartUpView, initial: true),
   MaterialRoute(page: WelcomeView),
   MaterialRoute(page: LoginView),
   MaterialRoute(page: SignUpView),

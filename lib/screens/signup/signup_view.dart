@@ -20,7 +20,6 @@ class SignUpView extends StatelessWidget {
 
       return ViewModelBuilder<SignUpViewModel>.reactive(
           viewModelBuilder: () => SignUpViewModel(),
-          onViewModelReady: (model) => model.cancel(),
           builder: (context, model, child) =>
               Scaffold(
                 body: SingleChildScrollView(
@@ -72,7 +71,6 @@ class SignUpView extends StatelessWidget {
                                         ),
                                         fontWeight: FontWeight.bold,
                                         color: Colors.indigo[800]),))
-
                             ],
                           ),
 
@@ -110,7 +108,9 @@ class SignUpView extends StatelessWidget {
                                     width: double.infinity,
                                     child: ElevatedButton(
                                       style: ButtonStyle(
-                                        padding: MaterialStateProperty.all(const EdgeInsets.symmetric(vertical: 20))
+                                        padding: MaterialStateProperty.all(EdgeInsets.symmetric(
+                                            vertical: model.isPending ? 14 : 20
+                                        ))
                                       ),
                                       onPressed: () {
                                         // if fields are not empty
@@ -121,35 +121,27 @@ class SignUpView extends StatelessWidget {
                                             (model.emailController.text != '') &&
                                             (model.passwordController.text !=
                                                 '')) {
-                                          //run sign up
-                                          model.signUp(context);
-
-                                          //display a processing snack bar
-                                          BotToast.showLoading(
-                                              duration: const Duration(seconds: 4)
-                                          );
+                                          //run sign up func
+                                          model.signUp();
                                         }
 
                                         else {
                                           BotToast.showSimpleNotification(
-                                            title: "Kindly fill all the fields correctly",
+                                            title: "Kindly fill all the fields correctly to register",
                                             subTitle: 'now!!!',
                                             align: const Alignment(0, -0.8),
                                             duration: const Duration(seconds: 5),
                                           );
                                         }
                                       },
-                                      child: const Text('Sign up'),
+                                      child:model.isPending ?
+                                      const CircularProgressIndicator(
+                                        strokeWidth: 2,
+                                        valueColor: AlwaysStoppedAnimation(Colors.white),
+                                      )
+                                          : const Text('Sign up'),
                                     ),
                                   ),
-
-                                  // TextButton(
-                                  //     onPressed: ()=>
-                                  //     model.test(),
-                                  //
-                                  //         // BotToast.showLoading(),
-                                  // child: const Text('dfs'),
-                                  // ),
                                 ]
                             ),
                           ),
