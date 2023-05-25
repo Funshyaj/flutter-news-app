@@ -52,7 +52,7 @@ class SignUpViewModel extends BaseViewModel {
    }
    else if(!result){
      BotToast.showSimpleNotification(
-       title: "Something went wrong, try again",
+       title: "Username taken, try again",
        align: const Alignment(0, -0.8),
        duration: const Duration(seconds: 4),
      );

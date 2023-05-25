@@ -54,6 +54,12 @@ dependencies:
   #responsiveness
   responsive_builder:
 
+  #Carousel slider
+  carousel_slider: ^4.2.1
+
+  #shimmer
+  shimmer: ^3.0.0
+
 dev_dependencies:
   flutter_test:
     sdk: flutter

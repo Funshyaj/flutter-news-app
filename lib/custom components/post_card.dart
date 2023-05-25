@@ -4,14 +4,12 @@ class PostCard extends StatelessWidget {
   const PostCard(this.author, this.title, this.description, this.url, this.urlToImage, this.publishedAt, this.content, {Key? key}) : super(key: key);
 
   final String? author;
-  final String title;
+  final String? title;
   final String? description;
-  final String url;
+  final String? url;
   final String? urlToImage;
-  final String publishedAt;
+  final String? publishedAt;
   final String? content;
-
-
 
   @override
   Widget build(BuildContext context) {
@@ -27,7 +25,8 @@ class PostCard extends StatelessWidget {
                 decoration: BoxDecoration(
                   borderRadius: const BorderRadius.all(Radius.circular(10)),
                   image: DecorationImage(
-                      image: NetworkImage(urlToImage??'not available'),
+                      image:
+                      NetworkImage(urlToImage??'https://picsum.photos/200/300'),
                       fit: BoxFit.cover),
                 ),
               ),
@@ -45,7 +44,7 @@ class PostCard extends StatelessWidget {
 
                       const SizedBox(height: 4,),
 
-                      Text(title,
+                      Text(title??'Title was not provided',
                           style: const TextStyle(
                               fontSize: 12,
                               fontWeight: FontWeight.bold,
@@ -65,7 +64,7 @@ class PostCard extends StatelessWidget {
                       overflow: TextOverflow.clip,
                       maxLines: 5,),
 
-                      Text(publishedAt??"",
+                      Text(publishedAt??'',
                         style:const TextStyle(
                             fontSize: 10,
                             fontWeight: FontWeight.w500,

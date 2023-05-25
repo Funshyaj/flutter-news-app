@@ -1,9 +1,16 @@
-import 'package:demo_app/custom%20components/home_post_card.dart';
+import 'package:demo_app/custom%20components/post_card.dart';
+import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:stacked/stacked.dart';
-import '../../../custom components/padded.dart';
-import '../../../models/bPost.dart';
+import '../../../custom components/shimmer_box_card.dart';
+import '../../../custom components/shimmer_row_card.dart';
+import '../../../models/post.dart';
+import '../full_news/full_details_view.dart';
 import 'home_viewmodel.dart';
+import 'package:carousel_slider/carousel_slider.dart';
+import 'package:demo_app/custom%20components/headerText.dart';
+import '../../../custom components/category_selection_button.dart';
+import '../../../custom components/pad.dart';
 
 class HomeView extends StatelessWidget {
   const HomeView({Key? key}) : super(key: key);
@@ -11,148 +18,200 @@ class HomeView extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return ViewModelBuilder<HomeViewModel>.reactive(
-      disposeViewModel: false,
-      initialiseSpecialViewModelsOnce: true,
       viewModelBuilder: () => HomeViewModel(),
-        builder: (context, model, child) =>
+      builder: (context, model, child) =>
           Scaffold(
-             body:model.isBusy ?
-             Center(
-               child: CircularProgressIndicator(
-                 valueColor: AlwaysStoppedAnimation(Colors.indigo[200]),
-               ),
-             )
-             : !model.hasError ?
+             body:
              SingleChildScrollView(
                child: Column(
                  crossAxisAlignment: CrossAxisAlignment.start,
                    children: [
 
-                     //recommended for you text
-                    const Padded( widget: Text('Recommended news for you',
-                         style: TextStyle(
-                             fontWeight: FontWeight.bold,
-                             fontSize: 24,
-                         ),),
-                     ),
+                     Column(
+                       children: [
 
-                   const Padded(widget: Text('Business headlines',
-                         style: TextStyle(
-                           fontWeight: FontWeight.bold,
-                           fontSize: 24,
+                         Pad(hor: 10, ver: 10,
+                         widget: Row(
+                           mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                           children: [
+                             IconButton(onPressed:(){
+                               if (kDebugMode) {
+                                 print('will activate drawer');
+
+                               }}, icon: const Icon(Icons.menu_rounded,weight:20,)
+                             ),
+                             IconButton(onPressed:(){
+                               if (kDebugMode) {
+                                 print('will activate drawer');
+
+                               }}, icon: const Icon(Icons.person_rounded,weight:20,)
+                             )
+                           ],
+                         ),),
+
+                         Pad(hor:10,
+                             widget: Row(
+                               mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                               children: [
+                                 const HeaderText(text: "Breaking News"),
+                                 TextButton(onPressed: (){
+                                 }, child: const Text('View all'))
+                               ],
+                             )),
+
+                 model.isBusy ?
+                 const ShimmerBoxCard()
+
+                     :
+                         CarouselSlider.builder(
+                             itemCount: 15,
+                             itemBuilder: (BuildContext context, int itemIndex, int pageViewIndex) {
+                               Article article = model.data![0][itemIndex];
+                               return Stack(
+                                 children: <Widget>[
+                                   Container(
+                                     decoration: BoxDecoration(
+                                       borderRadius: const BorderRadius.all(Radius.circular(20)),
+                                       image: DecorationImage(image:NetworkImage(article.urlToImage.toString())
+                                         ,fit: BoxFit.fill
+                                         ),
+                                     ),
+                                   ),
+                                   GestureDetector(
+                                     onTap:(){
+                                       Navigator.push(context,
+                                           MaterialPageRoute(builder: (context) => FullDetails(title: article.title.toString())));
+                                     },
+                                     child: Container(
+                                       padding: const EdgeInsets.all(5.0),
+                                       alignment: Alignment.bottomCenter,
+                                       decoration: BoxDecoration(
+                                         borderRadius: const BorderRadius.all(Radius.circular(20)),
+                                         gradient: LinearGradient(
+                                           begin: Alignment.topCenter,
+                                           end: Alignment.bottomCenter,
+                                           colors: <Color>[
+                                             Colors.black.withAlpha(20),
+                                             Colors.black45,
+                                             Colors.black,
+                                           ],
+                                         ),
+                                       ),
+                                       child: Text(article.title.toString(),
+                                         textAlign: TextAlign.center,
+                                         style: const TextStyle(color: Colors.white, fontSize: 18.0,fontWeight: FontWeight.bold ),
+
+                                       ),
+                                     ),
+                                   ),
+                                 ],
+                               );},
+                             options: CarouselOptions(
+                               aspectRatio: 16/9 ,
+                               viewportFraction: 0.83,
+                               initialPage: 1,
+                               enableInfiniteScroll: false,
+                               enlargeCenterPage: true,
+                               enlargeFactor: 0.3,
+                             )
                          ),
-                         textAlign: TextAlign.left,
-                       ),
-                     ),
-                     ListView.separated(
-                       shrinkWrap: true,
-                       key: const PageStorageKey('storage-key'),
-                         //this is what will be the separator among the mapped items
-                         separatorBuilder: (context, index)=> const SizedBox(height: 10,),
-                         itemCount: 3/*model.data?.length??0*/,
-                         physics: const BouncingScrollPhysics(),
-                       itemBuilder: (context,index) {
-                         Article article = model.data![index];
-                         return PostCard(
-                             article.author,
-                             article.title,
-                             article.description,
-                             article.url,
-                             article.urlToImage,
-                             article.publishedAt.toString(),
-                             article.content);
-                       }),
 
-                 const Padded(widget: Text('News on tech startups',
-                         style: TextStyle(
-                           fontWeight: FontWeight.bold,
-                           fontSize: 24,
-                         ),),
-                     ),
 
-                     ListView.separated(
-                         shrinkWrap: true,
-                         // key: const PageStorageKey('storage-key'),
-                         //this is what will be the separator among the mapped items
-                         separatorBuilder: (context, index)=> const SizedBox(height: 10,),
-                         itemCount: 3/*model.data?.length??0*/,
-                         physics: const BouncingScrollPhysics(),
-                         itemBuilder: (context,index) {
-                           Article article = model.data![index+3];
-                           return PostCard(
-                               article.author,
-                               article.title,
-                               article.description,
-                               article.url,
-                               article.urlToImage,
-                               article.publishedAt.toString(),
-                               article.content);
-                         }),
+                         Pad(ver: 30, hor:5,
+                           widget: SizedBox(
+                             height: 45,
+                             child: ListView(
+                               scrollDirection: Axis.horizontal,
+                               children: ['business', 'sports' , 'africa', 'start ups'].asMap().entries.map((entry) {
+                                 return Builder(
+                                     builder: (BuildContext context) {
+                                       return InkWell(
+                                           onTap: (){
+                                             model.switcher(entry.value);
+                                             model.switchColor(entry.key);
+                                           },
+                                           child: CategorySelectionButton(text: entry.value,
+                                              txt: model.txtColors[entry.key] , bg:model.bgColors[entry.key]
+
+                                             ,));
+                                     }
+                                 );
+                               }).toList(),
+                             ),
+                           ),),
 
 
 
+                         Padding(
+                           padding: const EdgeInsets.symmetric(horizontal: 10),
+                           child: Row(
+                             mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                             children: [
+                               const HeaderText(text: "Recommendations"),
+                               TextButton(onPressed: (){
+                               }, child: const Text('View all'))
+                             ],
+                           ),
+                         ),
 
-                      const Padded(widget: Text('News in Africa',
-                         style: TextStyle(
-                           fontWeight: FontWeight.bold,
-                           fontSize: 24,
-                         ),),
-                     ),
+                         model.isBusy ?
+                             Pad(
+                               hor: 16,
+                               widget: Column(
+                                 children: const [
+                                   ShimmerRowCard(),
+                                   SizedBox(height: 20,),
+                                   ShimmerRowCard()
+                                 ],
+                               ),
+                             )
+                             :
+                         ListView.separated(
+                             padding: const EdgeInsets.all(6),
+                             shrinkWrap: true,
+                             separatorBuilder: (context, index)=> const SizedBox(height: 10,),
+                             itemCount:5,
+                             physics: const BouncingScrollPhysics(),
+                             itemBuilder: (context,index) {
+                               Article article = model.allNewsCategories[
+                               model.categories == 'business' ? 1
+                                   :model.categories == 'sports'? 2
+                                   :model.categories == 'africa' ? 3
+                                   : 4
+                               ][index];
+                               return InkWell(
+                                 highlightColor:Colors.grey[500],
+                                 borderRadius: const BorderRadius.all(Radius.circular(20)),
+                                 onTap:(){
+                                   Navigator.push(context,
+                                       MaterialPageRoute(builder: (context) =>FullDetails(
+                                         title:article.title.toString(),
+                                         author : article.author,
+                                         description : article.description,
+                                         url : article.url.toString(),
+                                         urlToImage: article.urlToImage,
+                                         publishedAt:  article.publishedAt.toString(),
+                                         content: article.content
+                                           )));
+                                 },
+                                 child: PostCard(
+                                     article.author,
+                                     article.title.toString(),
+                                     article.description,
+                                     article.url.toString(),
+                                     article.urlToImage,
+                                     article.publishedAt.toString(),
+                                     article.content)
+                               );
+                             }),
 
-                     ListView.separated(
-                         shrinkWrap: true,
-                         // key: const PageStorageKey('storage-key'),
-                         //this is what will be the separator among the mapped items
-                         separatorBuilder: (context, index)=> const SizedBox(height: 10,),
-                         itemCount: 3/*model.data?.length??0*/,
-                         physics: const BouncingScrollPhysics(),
-                         itemBuilder: (context,index) {
-                           Article article = model.data![index+6];
-                           return PostCard(
-                               article.author,
-                               article.title,
-                               article.description,
-                               article.url,
-                               article.urlToImage,
-                               article.publishedAt.toString(),
-                               article.content);
-                         }),
 
-
-                   ],
+                       ],
+                     ),],
           ),
              )
-             // )
-
-
-           :  Container(
-               color: Colors.red,
-               alignment: Alignment.center,
-               child: Text(
-                 model.error.toString(),
-                 textAlign: TextAlign.center,
-                 style: const TextStyle(color: Colors.white),
-               ),
-             ),
 
            ),
         );
   }
 }
-
-//
-// Container(
-// margin: const EdgeInsets.only(top: 30),
-// padding: const EdgeInsets.all(10),
-// child: Column(
-// children: const [Padding(
-// padding: EdgeInsets.symmetric(vertical: 8.0),
-// child: Text('Tech news recommended for you',
-// style: TextStyle(
-// fontWeight: FontWeight.bold,
-// fontSize: 24,
-// ),),
-// ),
-// ]
-// ),
-// )

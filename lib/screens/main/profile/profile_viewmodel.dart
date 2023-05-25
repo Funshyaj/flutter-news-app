@@ -17,8 +17,16 @@ late String username;
 late String fullName;
 late String email;
 
-  Box box = Hive.box('otherData');
+ Box box = Hive.box('otherData');
   Box users = Hive.box<UserModel>('userdatabase');
+
+  String categories = 'business';
+
+   switcher(String category){
+    categories = category;
+    notifyListeners();
+
+}
 
 
  fetchUserInfo(){

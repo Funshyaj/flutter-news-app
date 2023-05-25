@@ -12,6 +12,10 @@ class SignUpServiceImpl extends SignUpService {
 
   @override
   Future<bool> signUpLogic(fullName, username, email, password) async {
+    //check if user with that username exist
+    if (users.containsKey(username)){
+      return false;
+    }
     //adding new user object to Hive
     await users.put(
         username,

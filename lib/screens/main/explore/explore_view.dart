@@ -1,10 +1,9 @@
-import 'package:demo_app/custom%20components/home_post_card.dart';
-import 'package:demo_app/models/sPost.dart';
+import 'package:demo_app/custom%20components/post_card.dart';
 import 'package:flutter/material.dart';
 import 'package:stacked/stacked.dart';
-import '../../../custom components/explore_post_card.dart';
 import '../../../custom components/headerText.dart';
 import '../../../custom components/padded.dart';
+import '../../../models/post.dart';
 import 'explore_viewmodel.dart';
 
 class ExploreView extends StatelessWidget {
@@ -70,8 +69,8 @@ class ExploreView extends StatelessWidget {
                         key: const PageStorageKey('storage-key1'),
                         physics: const BouncingScrollPhysics(),
                         itemBuilder: (context,index) {
-                          StartUpArticle article = model.startUpPosts[index];
-                          return ePostCard(
+                          Article article = model.startUpPosts[index];
+                          return PostCard(
                               article.author,
                               article.title,
                               article.description,
@@ -95,8 +94,8 @@ class ExploreView extends StatelessWidget {
                         key: const PageStorageKey('storage-key2'),
                         physics: const BouncingScrollPhysics(),
                         itemBuilder: (context,index) {
-                          StartUpArticle article = model.startUpPosts[index+11];
-                          return ePostCard(
+                          Article article = model.startUpPosts[index+11];
+                          return PostCard(
                               article.author,
                               article.title,
                               article.description,

@@ -5,22 +5,22 @@
 
 import 'dart:convert';
 
-Bpost bpostFromJson(String str) => Bpost.fromJson(json.decode(str));
+Post postFromJson(String str) => Post.fromJson(json.decode(str));
 
-String bpostToJson(Bpost data) => json.encode(data.toJson());
+String postToJson(Post data) => json.encode(data.toJson());
 
-class Bpost {
+class Post {
   String status;
   int totalResults;
   List<Article> articles;
 
-  Bpost({
+  Post({
     required this.status,
     required this.totalResults,
     required this.articles,
   });
 
-  factory Bpost.fromJson(Map<String, dynamic> json) => Bpost(
+  factory Post.fromJson(Map<String, dynamic> json) => Post(
     status: json["status"],
     totalResults: json["totalResults"],
     articles: List<Article>.from(json["articles"].map((x) => Article.fromJson(x))),
@@ -34,23 +34,23 @@ class Bpost {
 }
 
 class Article {
-  Source source;
+  Source? source;
   String? author;
-  String title;
+  String? title;
   String? description;
-  String url;
+  String? url;
   String? urlToImage;
-  DateTime publishedAt;
+  DateTime? publishedAt;
   String? content;
 
   Article({
-    required this.source,
+    this.source,
     this.author,
-    required this.title,
+    this.title,
     this.description,
-    required this.url,
+    this.url,
     this.urlToImage,
-    required this.publishedAt,
+    this.publishedAt,
     this.content,
   });
 
@@ -66,13 +66,13 @@ class Article {
   );
 
   Map<String, dynamic> toJson() => {
-    "source": source.toJson(),
+    "source": source?.toJson(),
     "author": author,
     "title": title,
     "description": description,
     "url": url,
     "urlToImage": urlToImage,
-    "publishedAt": publishedAt.toIso8601String(),
+    "publishedAt": publishedAt?.toIso8601String(),
     "content": content,
   };
 }
