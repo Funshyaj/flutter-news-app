@@ -67,21 +67,20 @@ Container(
                       ),
                       padding: const EdgeInsets.only(top: 50 , bottom: 0,left: 40,right: 40),
                       child: Column(
+                        mainAxisAlignment: MainAxisAlignment.spaceAround,
                         children: [
                           DeetsRow(icon: Icons.person_rounded,
                               text: model.fullName,
                               themeColor: Colors.indigoAccent.shade100,
-                              addPaddingBottom: true,),
+                              ),
 
                           DeetsRow(icon: Icons.email,
                               text: model.email,
-                              themeColor: Colors.indigoAccent.shade400,
-                              addPaddingBottom: true,),
+                              themeColor: Colors.indigoAccent.shade400,),
 
                           DeetsRow(icon: Icons.settings,
                               text: 'Settings',
-                              themeColor: Colors.blueAccent.shade100,
-                              addPaddingBottom: true,),
+                              themeColor: Colors.blueAccent.shade100,),
 
                           GestureDetector(
                             onTap: (){
@@ -90,7 +89,6 @@ Container(
                             child: DeetsRow(icon: Icons.logout,
                                 text: 'Logout',
                                 themeColor: Colors.redAccent.shade100,
-                              addPaddingBottom: false,
                             ),
                           ),
 

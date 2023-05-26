@@ -21,6 +21,63 @@ class HomeView extends StatelessWidget {
       viewModelBuilder: () => HomeViewModel(),
       builder: (context, model, child) =>
           Scaffold(
+              key: model.scaffoldState,
+             drawer: Drawer(
+               child: ListView(
+                 children: <Widget>[
+                   Container(
+                       height: 30.0
+                   ),
+                   ListTile(
+                     title: Text('Explore'),
+                     leading: Icon(Icons.explore),
+    onTap: () {
+    // Update the state of the app
+    // ...
+    // Then close the drawer
+    Navigator.pop(context);
+    },
+                   ),
+                   ListTile(
+                     title: Text('Saved'),
+                     leading: Icon(Icons.bookmark),
+    onTap: () {
+    // Update the state of the app
+    // ...
+    // Then close the drawer
+    Navigator.pop(context);
+    },
+                   ),
+                   ListTile(
+                     title: Text('Profile'),
+                     leading: Icon(Icons.person),
+                     onTap: () {
+                 // Update the state of the app
+                 // ...
+                 // Then close the drawer
+                 Navigator.pop(context);
+          },
+                   ),
+                   ListTile(
+                     title: Text('Settings'),
+                     leading: Icon(Icons.settings),
+    onTap: () {
+    Navigator.pop(context);
+    },
+                   ),
+                   ListTile(
+                     title: Text('Logout'),
+                     leading: Icon(Icons.logout),
+                     onTap: () {
+                         // Update the state of the app
+                         // ...
+                         // Then close the drawer
+                         Navigator.pop(context);
+                       },
+                   ),
+                 ],
+               ),
+             ),
              body:
              SingleChildScrollView(
                child: Column(
@@ -38,7 +95,9 @@ class HomeView extends StatelessWidget {
                                if (kDebugMode) {
                                  print('will activate drawer');
 
-                               }}, icon: const Icon(Icons.menu_rounded,weight:20,)
+                               }
+                               model.scaffoldState.currentState?.openDrawer();
+                               }, icon: const Icon(Icons.menu_rounded,weight:20,)
                              ),
                              IconButton(onPressed:(){
                                if (kDebugMode) {
@@ -61,7 +120,8 @@ class HomeView extends StatelessWidget {
 
                  model.isBusy ?
                  const ShimmerBoxCard()
-
+                     : model.hasError ?
+                 const ShimmerBoxCard()
                      :
                          CarouselSlider.builder(
                              itemCount: 15,
@@ -131,8 +191,7 @@ class HomeView extends StatelessWidget {
                                              model.switchColor(entry.key);
                                            },
                                            child: CategorySelectionButton(text: entry.value,
-                                              txt: model.txtColors[entry.key] , bg:model.bgColors[entry.key]
-
+                                              txt: model.colors[entry.key], bg:model.colors[entry.key+1]
                                              ,));
                                      }
                                  );
