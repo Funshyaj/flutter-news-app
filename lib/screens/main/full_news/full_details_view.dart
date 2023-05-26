@@ -1,3 +1,4 @@
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import '../../../custom components/pad.dart';
 
@@ -24,16 +25,16 @@ class FullDetails extends StatelessWidget {
                 children: [
                   IconButton(onPressed:(){
                     Navigator.pop(context);
-                  }, icon: const Icon(Icons.arrow_back_ios,weight:20,)
+                  }, icon: const Icon(CupertinoIcons.back,weight:20,)
                   ),
                   Row(
                     children: [
                       IconButton(onPressed:(){}
-                       , icon: const Icon(Icons.bookmark_border,weight:20,)
+                       , icon: const Icon(CupertinoIcons.bookmark,weight:20,)
                       ),
 
                       IconButton(onPressed:(){
-                     }, icon: const Icon(Icons.ios_share,weight:20,)
+                     }, icon: const Icon(CupertinoIcons.share,weight:20,)
                       ),
                     ],
                   )
