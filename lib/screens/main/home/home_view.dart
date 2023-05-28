@@ -1,5 +1,5 @@
 import 'package:demo_app/custom%20components/post_card.dart';
-import 'package:flutter/foundation.dart';
+import 'package:demo_app/screens/main/profile/profile_view.dart';
 import 'package:flutter/material.dart';
 import 'package:stacked/stacked.dart';
 import '../../../custom components/shimmer_box_card.dart';
@@ -11,12 +11,14 @@ import 'package:carousel_slider/carousel_slider.dart';
 import 'package:demo_app/custom%20components/headerText.dart';
 import '../../../custom components/category_selection_button.dart';
 import '../../../custom components/pad.dart';
+import 'package:flutter/cupertino.dart';
 
 class HomeView extends StatelessWidget {
   const HomeView({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
+    double width = MediaQuery.of(context).size.width;
     return ViewModelBuilder<HomeViewModel>.reactive(
       viewModelBuilder: () => HomeViewModel(),
       builder: (context, model, child) =>
@@ -40,7 +42,7 @@ class HomeView extends StatelessWidget {
                    ),
                    ListTile(
                      title: Text('Saved'),
-                     leading: Icon(Icons.bookmark),
+                     leading: const Icon(Icons.bookmark),
     onTap: () {
     // Update the state of the app
     // ...
@@ -92,19 +94,15 @@ class HomeView extends StatelessWidget {
                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
                            children: [
                              IconButton(onPressed:(){
-                               if (kDebugMode) {
-                                 print('will activate drawer');
-
-                               }
                                model.scaffoldState.currentState?.openDrawer();
                                }, icon: const Icon(Icons.menu_rounded,weight:20,)
                              ),
                              IconButton(onPressed:(){
-                               if (kDebugMode) {
-                                 print('will activate drawer');
-
-                               }}, icon: const Icon(Icons.person_rounded,weight:20,)
-                             )
+                               Navigator.push(context,
+                                   MaterialPageRoute(builder: (context) => const ProfileView()
+                               ));
+                             },
+                              icon: const Icon(Icons.person_rounded,weight:20)),
                            ],
                          ),),
 
@@ -121,7 +119,25 @@ class HomeView extends StatelessWidget {
                  model.isBusy ?
                  const ShimmerBoxCard()
                      : model.hasError ?
-                 const ShimmerBoxCard()
+                 SizedBox(
+                   height: 180,
+                   width: width * 0.83,
+                   // decoration:  BoxDecoration(
+                   //   color: Colors.grey[400],
+                   //   borderRadius: const BorderRadius.all(Radius.circular(10)),
+                   // ),
+                     child: Expanded(
+                       child: Column(
+                         children: [
+                          const Pad( ver:5 ,widget: Text('Something went wrong')),
+                          const Pad( ver:5 ,widget: Text('Check your network connection')),
+                           IconButton(onPressed: (){
+                             model.futureToRun();
+                           }, icon: const Icon(CupertinoIcons.refresh))
+                         ],
+                       ),
+                     )
+                 )
                      :
                          CarouselSlider.builder(
                              itemCount: 15,
@@ -140,7 +156,15 @@ class HomeView extends StatelessWidget {
                                    GestureDetector(
                                      onTap:(){
                                        Navigator.push(context,
-                                           MaterialPageRoute(builder: (context) => FullDetails(title: article.title.toString())));
+                                           MaterialPageRoute(builder: (context) => FullDetails(
+                                               title:article.title.toString(),
+                                               author : article.author,
+                                               description : article.description,
+                                               url : article.url.toString(),
+                                               urlToImage: article.urlToImage,
+                                               publishedAt:  article.publishedAt.toString(),
+                                               content: article.content
+                                           )));
                                      },
                                      child: Container(
                                        padding: const EdgeInsets.all(5.0),
@@ -224,6 +248,15 @@ class HomeView extends StatelessWidget {
                                  ],
                                ),
                              )
+                             : model.hasError ?
+                         SizedBox(
+                             child: Expanded(
+                               child: Column(
+                                 children: const [
+                                 ],
+                               ),
+                             )
+                         )
                              :
                          ListView.separated(
                              padding: const EdgeInsets.all(6),

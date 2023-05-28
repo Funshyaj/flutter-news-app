@@ -55,7 +55,6 @@ class FullDetails extends StatelessWidget {
                 width: double.infinity,
                 height: 200,
                 decoration: BoxDecoration(
-                  // borderRadius: const BorderRadius.all(Radius.circular(20)),
                   image: DecorationImage(image:NetworkImage(urlToImage??'https://picsum.photos/200/300')
                       ,fit: BoxFit.fill
                   ),
@@ -76,7 +75,7 @@ class FullDetails extends StatelessWidget {
               Pad(ver: 10,hor: 10,
                   widget: Text(content??'No content available',
                     textAlign: TextAlign.justify,
-                    style: TextStyle(
+                    style: const TextStyle(
                       leadingDistribution: TextLeadingDistribution.even,
                       fontSize: 16,
                       wordSpacing: 10,
@@ -84,7 +83,7 @@ class FullDetails extends StatelessWidget {
                     ),
                   )),
 
-              Pad(ver: 10,hor: 10,
+              const Pad(ver: 10,hor: 10,
                   widget: Text('view full news at...'))
 
 

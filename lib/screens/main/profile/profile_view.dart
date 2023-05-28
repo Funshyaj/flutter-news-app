@@ -1,5 +1,6 @@
 import 'package:demo_app/custom%20components/profile_deets_row.dart';
 import 'package:demo_app/screens/main/profile/profile_viewmodel.dart';
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:responsive_builder/responsive_builder.dart';
 import 'package:stacked/stacked.dart';
@@ -45,7 +46,7 @@ Container(
         decoration: BoxDecoration(
             color: Colors.indigo[100],
               borderRadius: const BorderRadius.all(Radius.circular(100),)),
-        child: Icon(Icons.person_outline,size: 120,color: Colors.indigo[800],),),
+        child: Icon(CupertinoIcons.person,size: 120,color: Colors.indigo[800],),),
  const SizedBox(height: 10,),
   Text(model.username,
     style: TextStyle(fontWeight: FontWeight.bold,
@@ -69,16 +70,16 @@ Container(
                       child: Column(
                         mainAxisAlignment: MainAxisAlignment.spaceAround,
                         children: [
-                          DeetsRow(icon: Icons.person_rounded,
+                          DeetsRow(icon: CupertinoIcons.person,
                               text: model.fullName,
                               themeColor: Colors.indigoAccent.shade100,
                               ),
 
-                          DeetsRow(icon: Icons.email,
+                          DeetsRow(icon: CupertinoIcons.mail_solid,
                               text: model.email,
                               themeColor: Colors.indigoAccent.shade400,),
 
-                          DeetsRow(icon: Icons.settings,
+                          DeetsRow(icon: CupertinoIcons.settings,
                               text: 'Settings',
                               themeColor: Colors.blueAccent.shade100,),
 

@@ -1,7 +1,9 @@
 import 'package:demo_app/custom%20components/post_card.dart';
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:stacked/stacked.dart';
 import '../../../custom components/headerText.dart';
+import '../../../custom components/pad.dart';
 import '../../../custom components/padded.dart';
 import '../../../models/post.dart';
 import 'explore_viewmodel.dart';
@@ -11,6 +13,7 @@ class ExploreView extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    double width = MediaQuery.of(context).size.width;
     return ViewModelBuilder<ExploreViewModel>.reactive
       (viewModelBuilder: () => ExploreViewModel(),
         onViewModelReady: (model)=> model.getDiffPosts(),
@@ -18,13 +21,7 @@ class ExploreView extends StatelessWidget {
 
       builder: (context, model, child) =>
       Scaffold(
-        body: model.startUpPosts.isEmpty && model.businessPosts.isEmpty ?
-        Center(
-          child: CircularProgressIndicator(
-            valueColor: AlwaysStoppedAnimation(Colors.indigo[200]),
-          ),
-        )
-            : model.startUpPosts.isNotEmpty && model.businessPosts.isNotEmpty ?
+        body:
         SingleChildScrollView(
               child: Container(
                 margin: const EdgeInsets.only(top: 20),
@@ -37,6 +34,15 @@ class ExploreView extends StatelessWidget {
                       widget: HeaderText(text: "Business News"),
                     ),
 
+                    model.startUpPosts.isEmpty && model.businessPosts.isEmpty ?
+                    Center(
+                      child: CircularProgressIndicator(
+                        valueColor: AlwaysStoppedAnimation(Colors.indigo[200]),
+                      ),
+                    )
+                        : model.startUpPosts.isNotEmpty && model.businessPosts.isNotEmpty ?
+                    Column(
+                      children :[
                     ListView.separated(
                         shrinkWrap: true,
                         key: const PageStorageKey('storage-key'),
@@ -105,21 +111,31 @@ class ExploreView extends StatelessWidget {
                               article.content);
 
                         }),
+                      ])
+
+                        :  SizedBox(
+                        height: 180,
+                        width: width * 0.83,
+                        // decoration:  BoxDecoration(
+                        //   color: Colors.grey[400],
+                        //   borderRadius: const BorderRadius.all(Radius.circular(10)),
+                        // ),
+                        child: Expanded(
+                          child: Column(
+                            children: [
+                              const Pad( ver:5 ,widget: Text('Something went wrong')),
+                              const Pad( ver:5 ,widget: Text('Check your network connection')),
+                              IconButton(onPressed: (){
+                                model.getDiffPosts();
+                              }, icon: const Icon(CupertinoIcons.refresh))
+                            ],
+                          ),
+                        )
+                    )
                   ],
                 ),
               ),
             )
-        //recommended for you text
-
-            :  Container(
-          color: Colors.red,
-          alignment: Alignment.center,
-          child: Text(
-            model.error.toString(),
-            textAlign: TextAlign.center,
-            style: const TextStyle(color: Colors.white),
-          ),
-        ),
 
       )
     );

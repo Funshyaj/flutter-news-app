@@ -11,7 +11,6 @@ class ExploreViewModel extends BaseViewModel{
   List<Article> startUpPosts = [];
   List<Article> businessPosts = [];
 
-
   getStartUpPosts()async {
     startUpPosts =  await _fetchPostServices.getStartUpNews();
     notifyListeners();
@@ -22,10 +21,11 @@ class ExploreViewModel extends BaseViewModel{
     notifyListeners();
   }
 
-  getDiffPosts(){
+  getDiffPosts()async{
 getStartUpPosts();
 getBusinessPosts();
   notifyListeners();
+
 }
 
 
