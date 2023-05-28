@@ -2,9 +2,11 @@ import 'package:demo_app/custom%20components/post_card.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:stacked/stacked.dart';
+import '../../../app/app.locator.dart';
 import '../../../custom components/headerText.dart';
 import '../../../custom components/pad.dart';
 import '../../../custom components/padded.dart';
+import '../../../custom components/shimmer_row_card.dart';
 import '../../../models/post.dart';
 import 'explore_viewmodel.dart';
 
@@ -13,12 +15,10 @@ class ExploreView extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    double width = MediaQuery.of(context).size.width;
     return ViewModelBuilder<ExploreViewModel>.reactive
-      (viewModelBuilder: () => ExploreViewModel(),
-        onViewModelReady: (model)=> model.getDiffPosts(),
+      (viewModelBuilder: () => locator<ExploreViewModel>(),
         disposeViewModel: false,
-
+        initialiseSpecialViewModelsOnce: true,
       builder: (context, model, child) =>
       Scaffold(
         body:
@@ -34,13 +34,40 @@ class ExploreView extends StatelessWidget {
                       widget: HeaderText(text: "Business News"),
                     ),
 
-                    model.startUpPosts.isEmpty && model.businessPosts.isEmpty ?
-                    Center(
-                      child: CircularProgressIndicator(
-                        valueColor: AlwaysStoppedAnimation(Colors.indigo[200]),
+                    model.isBusy ?
+                    Pad(
+                      hor: 16,
+                      widget: Column(
+                        children: const [
+                          ShimmerRowCard(),
+                          SizedBox(height: 20,),
+                          ShimmerRowCard(),
+                          SizedBox(height: 20,),
+                          ShimmerRowCard(),
+                          SizedBox(height: 20,),
+                          ShimmerRowCard()
+                        ],
                       ),
                     )
-                        : model.startUpPosts.isNotEmpty && model.businessPosts.isNotEmpty ?
+
+                  : model.hasError ?
+
+                    SizedBox(
+                        height: 200,
+                        width: double.infinity,
+                        child: Column(
+                          mainAxisAlignment: MainAxisAlignment.center,
+                          children: [
+                            const Pad( ver:5 ,widget: Text('Something went wrong')),
+                            const Pad( ver:5 ,widget: Text('Check your network connection')),
+                            IconButton(onPressed: (){
+                              model.initialise();
+                            }, icon: const Icon(CupertinoIcons.refresh))
+                          ],
+                        )
+                    )
+
+                        :
                     Column(
                       children :[
                     ListView.separated(
@@ -51,7 +78,7 @@ class ExploreView extends StatelessWidget {
                         itemCount: 10,
                         physics: const BouncingScrollPhysics(),
                         itemBuilder: (context,index) {
-                          var article = model.businessPosts[index];
+                          var article = model.allNewsCategories[1][index];
                           return PostCard(
                               article.author,
                               article.title,
@@ -68,14 +95,13 @@ class ExploreView extends StatelessWidget {
 
                     ListView.separated(
                         shrinkWrap: true,
-                        // key: const PageStorageKey('storage-key1'),
                         //this is what will be the separator among the mapped items
                         separatorBuilder: (context, index)=> const SizedBox(height: 10,),
                         itemCount: 10,
                         key: const PageStorageKey('storage-key1'),
                         physics: const BouncingScrollPhysics(),
                         itemBuilder: (context,index) {
-                          Article article = model.startUpPosts[index];
+                          Article article = model.allNewsCategories[4][index];
                           return PostCard(
                               article.author,
                               article.title,
@@ -88,19 +114,43 @@ class ExploreView extends StatelessWidget {
                         }),
 
           const Padded(
-            widget: HeaderText(text: "More on start ups"),
+            widget: HeaderText(text: "Sports News"),
           ),
 
                     ListView.separated(
                         shrinkWrap: true,
-                        // key: const PageStorageKey('storage-key1'),
                         //this is what will be the separator among the mapped items
                         separatorBuilder: (context, index)=> const SizedBox(height: 10,),
                         itemCount: 10,
                         key: const PageStorageKey('storage-key2'),
                         physics: const BouncingScrollPhysics(),
                         itemBuilder: (context,index) {
-                          Article article = model.startUpPosts[index+11];
+                          Article article = model.allNewsCategories[2][index];
+                          return PostCard(
+                              article.author,
+                              article.title,
+                              article.description,
+                              article.url,
+                              article.urlToImage,
+                              article.publishedAt.toString(),
+                              article.content);
+
+                        })  ,
+
+
+                        const Padded(
+            widget: HeaderText(text: "Africa News"),
+          ),
+
+                    ListView.separated(
+                        shrinkWrap: true,
+                        //this is what will be the separator among the mapped items
+                        separatorBuilder: (context, index)=> const SizedBox(height: 10,),
+                        itemCount: 10,
+                        key: const PageStorageKey('storage-key3'),
+                        physics: const BouncingScrollPhysics(),
+                        itemBuilder: (context,index) {
+                          Article article = model.allNewsCategories[3][index];
                           return PostCard(
                               article.author,
                               article.title,
@@ -112,26 +162,6 @@ class ExploreView extends StatelessWidget {
 
                         }),
                       ])
-
-                        :  SizedBox(
-                        height: 180,
-                        width: width * 0.83,
-                        // decoration:  BoxDecoration(
-                        //   color: Colors.grey[400],
-                        //   borderRadius: const BorderRadius.all(Radius.circular(10)),
-                        // ),
-                        child: Expanded(
-                          child: Column(
-                            children: [
-                              const Pad( ver:5 ,widget: Text('Something went wrong')),
-                              const Pad( ver:5 ,widget: Text('Check your network connection')),
-                              IconButton(onPressed: (){
-                                model.getDiffPosts();
-                              }, icon: const Icon(CupertinoIcons.refresh))
-                            ],
-                          ),
-                        )
-                    )
                   ],
                 ),
               ),

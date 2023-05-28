@@ -19,7 +19,7 @@ class FullDetails extends StatelessWidget {
         body: SingleChildScrollView(
           child: Column(
             children: [
-            Pad(hor: 10, ver: 30,
+            Pad(hor: 10, ver: 20,
               widget: Row(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
@@ -61,29 +61,39 @@ class FullDetails extends StatelessWidget {
                 ),
               ),
 
-              Pad(ver: 10,hor: 10,
-                  widget: Text(description??'No description')),
+              Pad(ver: 10,hor: 5,
+                  widget: Text(description??'No description',
+                  textAlign: TextAlign.justify,)),
 
-              Row(
-                mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                children:[
-                Text(author??'Unknown author',
-                  overflow: TextOverflow.ellipsis,),
-                Text(publishedAt??'Today')
-                ]),
+              SizedBox(
+                height: 60,
+                child: Pad(hor: 5,
+                  widget: Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    children:[
+                    Expanded(
+                      child: Text(author??'Unknown author',
+                        style: const TextStyle(
+                          fontWeight: FontWeight.bold
+                        ),
+                        // overflow: TextOverflow.ellipsis,
+                      ),
+                    ),
+                    Text(publishedAt??'Today')
+                    ]),
+                ),
+              ),
 
-              Pad(ver: 10,hor: 10,
+              Pad(ver: 10,hor: 5,
                   widget: Text(content??'No content available',
                     textAlign: TextAlign.justify,
                     style: const TextStyle(
-                      leadingDistribution: TextLeadingDistribution.even,
                       fontSize: 16,
-                      wordSpacing: 10,
                       fontWeight: FontWeight.w500
                     ),
                   )),
 
-              const Pad(ver: 10,hor: 10,
+              const Pad(ver: 10,hor: 5,
                   widget: Text('view full news at...'))
 
 

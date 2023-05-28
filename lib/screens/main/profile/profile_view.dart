@@ -46,7 +46,7 @@ Container(
         decoration: BoxDecoration(
             color: Colors.indigo[100],
               borderRadius: const BorderRadius.all(Radius.circular(100),)),
-        child: Icon(CupertinoIcons.person,size: 120,color: Colors.indigo[800],),),
+        child: Icon(CupertinoIcons.person_fill,size: 120,color: Colors.indigo[800],),),
  const SizedBox(height: 10,),
   Text(model.username,
     style: TextStyle(fontWeight: FontWeight.bold,
@@ -66,7 +66,7 @@ Container(
                             topLeft: Radius.circular(50),
                             topRight: Radius.circular(50))
                       ),
-                      padding: const EdgeInsets.only(top: 50 , bottom: 0,left: 40,right: 40),
+                      padding: const EdgeInsets.only(top: 40 , bottom: 0,left: 30,right: 30),
                       child: Column(
                         mainAxisAlignment: MainAxisAlignment.spaceAround,
                         children: [

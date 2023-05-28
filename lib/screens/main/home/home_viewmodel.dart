@@ -40,12 +40,12 @@ String categories = 'business';
 
   ];
 
-  // List<Color> bgColors = [
-  //   Colors.transparent,
-  //   Colors.indigo,
-  //   Colors.indigo,
-  //   Colors.indigo
-  // ];
+  List<Color> bgColors = [
+    Colors.transparent,
+    Colors.indigo,
+    Colors.indigo,
+    Colors.indigo
+  ];
 switchColor(int index){
   if(index == 1){
     colors = [
@@ -55,12 +55,12 @@ switchColor(int index){
        Colors.white,
        Colors.white,
     ];
-    // bgColors = [
-    //     Colors.indigo,
-    //     Colors.transparent,
-    //     Colors.indigo,
-    //     Colors.indigo
-    // ];
+    bgColors = [
+        Colors.indigo,
+        Colors.transparent,
+        Colors.indigo,
+        Colors.indigo
+    ];
     notifyListeners();
   }
   else if(index == 2){
@@ -70,12 +70,12 @@ switchColor(int index){
       Colors.indigo,
       Colors.white,
     ];
-    // bgColors = [
-    //     Colors.indigo,
-    //     Colors.indigo,
-    //     Colors.transparent,
-    //     Colors.indigo
-    // ];
+    bgColors = [
+        Colors.indigo,
+        Colors.indigo,
+        Colors.transparent,
+        Colors.indigo
+    ];
     notifyListeners();
   }
   else if(index == 3){
@@ -85,12 +85,12 @@ switchColor(int index){
         Colors.white,
         Colors.indigo,
     ];
-    // bgColors = [
-    //     Colors.indigo,
-    //     Colors.indigo,
-    //     Colors.indigo,
-    //     Colors.transparent
-    // ];
+    bgColors = [
+        Colors.indigo,
+        Colors.indigo,
+        Colors.indigo,
+        Colors.transparent
+    ];
     notifyListeners();
   }
   else{
@@ -100,12 +100,12 @@ switchColor(int index){
        Colors.white,
        Colors.white,
     ];
-    // bgColors = [
-    //     Colors.transparent,
-    //     Colors.indigo,
-    //     Colors.indigo,
-    //     Colors.indigo
-    // ];
+    bgColors = [
+        Colors.transparent,
+        Colors.indigo,
+        Colors.indigo,
+        Colors.indigo
+    ];
     notifyListeners();
   }
 }

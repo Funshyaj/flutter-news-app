@@ -3,30 +3,26 @@ import '../../../app/app.locator.dart';
 import '../../../models/post.dart';
 import '../../../services/api_services.dart';
 
-class ExploreViewModel extends BaseViewModel{
+class ExploreViewModel extends FutureViewModel<List<List<Article>>>{
 
 //  setting up services
-  final _fetchPostServices = locator<ApiService>();
+  final _fetchNewsServices = locator<ApiService>();
 
-  List<Article> startUpPosts = [];
-  List<Article> businessPosts = [];
+  // final streamController = StreamController<List<Article>>();
 
-  getStartUpPosts()async {
-    startUpPosts =  await _fetchPostServices.getStartUpNews();
+  List<List<Article>> allNewsCategories = [] ;
+
+  @override
+  Future <List<List<Article>>> futureToRun()async {
+
+    allNewsCategories.add(await _fetchNewsServices.getHeadlines()); // 0
+    allNewsCategories.add(await _fetchNewsServices.getBusinessNews()); // 1
+    allNewsCategories.add(await _fetchNewsServices.getSportsNews()); // 2
+    allNewsCategories.add(await _fetchNewsServices.getAfricaNews()); // 3
+    allNewsCategories.add(await _fetchNewsServices.getStartUpNews()); // 4
     notifyListeners();
+    return allNewsCategories;
   }
-
-  getBusinessPosts()async{
-    businessPosts =  await _fetchPostServices.getBusinessNews();
-    notifyListeners();
-  }
-
-  getDiffPosts()async{
-getStartUpPosts();
-getBusinessPosts();
-  notifyListeners();
-
-}
 
 
 

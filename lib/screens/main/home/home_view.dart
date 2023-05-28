@@ -1,3 +1,4 @@
+import 'package:demo_app/app/app.locator.dart';
 import 'package:demo_app/custom%20components/post_card.dart';
 import 'package:demo_app/screens/main/profile/profile_view.dart';
 import 'package:flutter/material.dart';
@@ -20,7 +21,9 @@ class HomeView extends StatelessWidget {
   Widget build(BuildContext context) {
     double width = MediaQuery.of(context).size.width;
     return ViewModelBuilder<HomeViewModel>.reactive(
-      viewModelBuilder: () => HomeViewModel(),
+    disposeViewModel: false,
+      initialiseSpecialViewModelsOnce: true,
+      viewModelBuilder: () => locator<HomeViewModel>(),
       builder: (context, model, child) =>
           Scaffold(
               key: model.scaffoldState,
@@ -122,24 +125,20 @@ class HomeView extends StatelessWidget {
                  SizedBox(
                    height: 180,
                    width: width * 0.83,
-                   // decoration:  BoxDecoration(
-                   //   color: Colors.grey[400],
-                   //   borderRadius: const BorderRadius.all(Radius.circular(10)),
-                   // ),
-                     child: Expanded(
-                       child: Column(
-                         children: [
-                          const Pad( ver:5 ,widget: Text('Something went wrong')),
-                          const Pad( ver:5 ,widget: Text('Check your network connection')),
-                           IconButton(onPressed: (){
-                             model.futureToRun();
-                           }, icon: const Icon(CupertinoIcons.refresh))
-                         ],
-                       ),
+                     child: Column(
+                       mainAxisAlignment: MainAxisAlignment.center,
+                       children: [
+                        const Pad( ver:5 ,widget: Text('Something went wrong')),
+                        const Pad( ver:5 ,widget: Text('Check your network connection')),
+                         IconButton(onPressed: (){
+                          model.initialise();
+                         }, icon: const Icon(CupertinoIcons.refresh))
+                       ],
                      )
                  )
                      :
                          CarouselSlider.builder(
+                           key: const PageStorageKey('carousel'),
                              itemCount: 15,
                              itemBuilder: (BuildContext context, int itemIndex, int pageViewIndex) {
                                Article article = model.data![0][itemIndex];
@@ -148,7 +147,7 @@ class HomeView extends StatelessWidget {
                                    Container(
                                      decoration: BoxDecoration(
                                        borderRadius: const BorderRadius.all(Radius.circular(20)),
-                                       image: DecorationImage(image:NetworkImage(article.urlToImage.toString())
+                                       image: DecorationImage(image:NetworkImage(article.urlToImage??'https://picsum.photos/200/300' )
                                          ,fit: BoxFit.fill
                                          ),
                                      ),
@@ -181,7 +180,7 @@ class HomeView extends StatelessWidget {
                                            ],
                                          ),
                                        ),
-                                       child: Text(article.title.toString(),
+                                       child: Text(article.title??'No Title, click to see more...',
                                          textAlign: TextAlign.center,
                                          style: const TextStyle(color: Colors.white, fontSize: 18.0,fontWeight: FontWeight.bold ),
 
@@ -215,7 +214,7 @@ class HomeView extends StatelessWidget {
                                              model.switchColor(entry.key);
                                            },
                                            child: CategorySelectionButton(text: entry.value,
-                                              txt: model.colors[entry.key], bg:model.colors[entry.key+1]
+                                              txt: model.colors[entry.key], bg:model.bgColors[entry.key]
                                              ,));
                                      }
                                  );
@@ -250,15 +249,14 @@ class HomeView extends StatelessWidget {
                              )
                              : model.hasError ?
                          SizedBox(
-                             child: Expanded(
-                               child: Column(
-                                 children: const [
-                                 ],
-                               ),
+                             child: Column(
+                               children: const [
+                               ],
                              )
                          )
                              :
                          ListView.separated(
+                           key: const PageStorageKey('list view'),
                              padding: const EdgeInsets.all(6),
                              shrinkWrap: true,
                              separatorBuilder: (context, index)=> const SizedBox(height: 10,),
