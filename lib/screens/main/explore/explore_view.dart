@@ -1,4 +1,4 @@
-import 'package:demo_app/custom%20components/post_card.dart';
+import 'package:News_Daily/custom%20components/post_card.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:stacked/stacked.dart';

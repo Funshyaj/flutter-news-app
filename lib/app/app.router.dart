@@ -5,13 +5,13 @@
 // **************************************************************************
 
 // ignore_for_file: no_leading_underscores_for_library_prefixes
-import 'package:demo_app/screens/login/login_view.dart' as _i4;
-import 'package:demo_app/screens/main/main_view.dart' as _i6;
-import 'package:demo_app/screens/signup/signup_view.dart' as _i5;
-import 'package:demo_app/screens/startup/startup_view.dart' as _i2;
-import 'package:demo_app/screens/welcome/welcome_view.dart' as _i3;
 import 'package:flutter/material.dart' as _i7;
 import 'package:flutter/material.dart';
+import 'package:News_Daily/screens/login/login_view.dart' as _i4;
+import 'package:News_Daily/screens/main/main_view.dart' as _i6;
+import 'package:News_Daily/screens/signup/signup_view.dart' as _i5;
+import 'package:News_Daily/screens/startup/startup_view.dart' as _i2;
+import 'package:News_Daily/screens/welcome/welcome_view.dart' as _i3;
 import 'package:stacked/stacked.dart' as _i1;
 import 'package:stacked_services/stacked_services.dart' as _i8;
 

@@ -1,5 +1,5 @@
-import 'package:demo_app/custom%20components/profile_deets_row.dart';
-import 'package:demo_app/screens/main/profile/profile_viewmodel.dart';
+import 'package:News_Daily/custom%20components/profile_deets_row.dart';
+import 'package:News_Daily/screens/main/profile/profile_viewmodel.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:responsive_builder/responsive_builder.dart';

@@ -1,4 +1,4 @@
-package com.example.demo_app
+package com.example.News_Daily
 
 import io.flutter.embedding.android.FlutterActivity
 

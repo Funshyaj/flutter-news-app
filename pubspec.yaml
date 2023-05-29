@@ -1,5 +1,5 @@
-name: demo_app
-description: A new Flutter project.
+name: News_Daily
+description: A news app.
 # The following line prevents the package from being accidentally published to
 # pub.dev using `flutter pub publish`. This is preferred for private packages.
 publish_to: 'none' # Remove this line if you wish to publish to pub.dev
@@ -39,6 +39,9 @@ dependencies:
 
   # networking
   dio: ^5.1.1
+
+  # mocks for api test
+  mockito:
 
   # state management
   stacked: ^3.2.3

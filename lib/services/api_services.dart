@@ -2,7 +2,7 @@ import 'package:dio/dio.dart';
 import '../models/post.dart';
 
 abstract class ApiService{
-  Future<List<Article>> getHeadlines();
+  Future<List<Article>> getHeadlines(Dio dio);
   Future<List<Article>> getBusinessNews();
   Future<List<Article>> getStartUpNews();
   Future<List<Article>> getSportsNews();
@@ -23,13 +23,17 @@ class ApiServiceImpl extends ApiService{
   final dio = Dio();
 
   @override
-  Future<List<Article>> getHeadlines() async{
+  Future<List<Article>> getHeadlines(Dio dio) async{
     var news = <Article>[];
     //making network request...
-    var res = await dio.get(headlinesApi);
+    var res = await dio.get(
+        headlinesApi,
+        // options: Options(headers:{"j":"mjmj"})
+        );
     news = Post.fromJson(res.data).articles;
     return news;
   }
+
   @override
   Future<List<Article>> getBusinessNews() async{
     var news = <Article>[];
@@ -43,7 +47,7 @@ class ApiServiceImpl extends ApiService{
   Future<List<Article>> getStartUpNews()async{
     var news = <Article>[];
     //making network request...
-    var res = await dio.get(sportNewsApi);
+    var res = await dio.get(startUpNewsApi);
     news = Post.fromJson(res.data).articles;
     return news;
   }

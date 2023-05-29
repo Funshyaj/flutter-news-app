@@ -1,6 +1,6 @@
 import 'package:bot_toast/bot_toast.dart';
-import 'package:demo_app/app/app.locator.dart';
-import 'package:demo_app/app/app.router.dart';
+import 'package:News_Daily/app/app.locator.dart';
+import 'package:News_Daily/app/app.router.dart';
 import 'package:flutter/material.dart';
 import 'package:hive_flutter/hive_flutter.dart';
 import 'package:responsive_builder/responsive_builder.dart';

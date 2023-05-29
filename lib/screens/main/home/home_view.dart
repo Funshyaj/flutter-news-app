@@ -1,6 +1,6 @@
-import 'package:demo_app/app/app.locator.dart';
-import 'package:demo_app/custom%20components/post_card.dart';
-import 'package:demo_app/screens/main/profile/profile_view.dart';
+import 'package:News_Daily/app/app.locator.dart';
+import 'package:News_Daily/custom%20components/post_card.dart';
+import 'package:News_Daily/screens/main/profile/profile_view.dart';
 import 'package:flutter/material.dart';
 import 'package:stacked/stacked.dart';
 import '../../../custom components/shimmer_box_card.dart';
@@ -9,7 +9,7 @@ import '../../../models/post.dart';
 import '../full_news/full_details_view.dart';
 import 'home_viewmodel.dart';
 import 'package:carousel_slider/carousel_slider.dart';
-import 'package:demo_app/custom%20components/headerText.dart';
+import 'package:News_Daily/custom%20components/headerText.dart';
 import '../../../custom components/category_selection_button.dart';
 import '../../../custom components/pad.dart';
 import 'package:flutter/cupertino.dart';

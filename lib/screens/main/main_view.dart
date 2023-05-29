@@ -1,6 +1,6 @@
-import 'package:demo_app/screens/main/explore/explore_view.dart';
-import 'package:demo_app/screens/main/home/home_view.dart';
-import 'package:demo_app/screens/main/profile/profile_view.dart';
+import 'package:News_Daily/screens/main/explore/explore_view.dart';
+import 'package:News_Daily/screens/main/home/home_view.dart';
+import 'package:News_Daily/screens/main/profile/profile_view.dart';
 import 'package:flutter/material.dart';
 import 'package:stacked/stacked.dart';
 import 'main_viewmodel.dart';

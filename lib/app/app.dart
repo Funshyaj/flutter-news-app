@@ -1,8 +1,8 @@
-import 'package:demo_app/screens/main/home/home_viewmodel.dart';
-import 'package:demo_app/services/api_services.dart';
-import 'package:demo_app/services/auth_services.dart';
+import 'package:News_Daily/screens/main/home/home_viewmodel.dart';
+import 'package:News_Daily/services/api_services.dart';
+import 'package:News_Daily/services/auth_services.dart';
 import 'package:stacked/stacked_annotations.dart';
-import 'package:demo_app/screens/welcome/welcome_view.dart';
+import 'package:News_Daily/screens/welcome/welcome_view.dart';
 import 'package:stacked_services/stacked_services.dart';
 import '../screens/login/login_view.dart';
 import '../screens/main/explore/explore_viewmodel.dart';

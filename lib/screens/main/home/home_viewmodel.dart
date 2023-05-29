@@ -1,5 +1,6 @@
-import 'package:demo_app/models/post.dart';
-import 'package:demo_app/services/api_services.dart';
+import 'package:News_Daily/models/post.dart';
+import 'package:News_Daily/services/api_services.dart';
+import 'package:dio/dio.dart';
 import 'package:flutter/material.dart';
 import 'package:stacked/stacked.dart';
 import '../../../app/app.locator.dart';
@@ -16,7 +17,7 @@ List<List<Article>> allNewsCategories = [] ;
 
 @override
   Future <List<List<Article>>> futureToRun()async{
-  allNewsCategories.add(await _fetchNewsServices.getHeadlines()); // 0
+  allNewsCategories.add(await _fetchNewsServices.getHeadlines(Dio())); // 0
   allNewsCategories.add(await _fetchNewsServices.getBusinessNews()); // 1
   allNewsCategories.add(await _fetchNewsServices.getSportsNews()); // 2
   allNewsCategories.add(await _fetchNewsServices.getAfricaNews()); // 3

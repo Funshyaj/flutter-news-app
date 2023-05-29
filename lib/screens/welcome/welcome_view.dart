@@ -1,4 +1,4 @@
-import 'package:demo_app/screens/welcome/welcome_viewmodel.dart';
+import 'package:News_Daily/screens/welcome/welcome_viewmodel.dart';
 import 'package:responsive_builder/responsive_builder.dart';
 import 'package:stacked/stacked.dart';
 import 'package:flutter/material.dart';

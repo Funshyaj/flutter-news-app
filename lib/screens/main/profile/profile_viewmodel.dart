@@ -1,4 +1,4 @@
-import 'package:demo_app/app/app.router.dart';
+import 'package:News_Daily/app/app.router.dart';
 import 'package:hive/hive.dart';
 import 'package:stacked/stacked.dart';
 import 'package:stacked_services/stacked_services.dart';

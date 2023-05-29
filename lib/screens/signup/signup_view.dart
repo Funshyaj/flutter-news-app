@@ -1,5 +1,5 @@
 import 'package:bot_toast/bot_toast.dart';
-import 'package:demo_app/screens/signup/signup_viewmodel.dart';
+import 'package:News_Daily/screens/signup/signup_viewmodel.dart';
 import 'package:flutter/material.dart';
 import 'package:responsive_builder/responsive_builder.dart';
 import 'package:stacked/stacked.dart';

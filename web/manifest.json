@@ -1,6 +1,6 @@
 {
-    "name": "demo_app",
-    "short_name": "demo_app",
+    "name": "News_Daily",
+    "short_name": "News_Daily",
     "start_url": ".",
     "display": "standalone",
     "background_color": "#0175C2",

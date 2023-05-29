@@ -1,3 +1,4 @@
+import 'package:dio/dio.dart';
 import 'package:stacked/stacked.dart';
 import '../../../app/app.locator.dart';
 import '../../../models/post.dart';
@@ -15,7 +16,7 @@ class ExploreViewModel extends FutureViewModel<List<List<Article>>>{
   @override
   Future <List<List<Article>>> futureToRun()async {
 
-    allNewsCategories.add(await _fetchNewsServices.getHeadlines()); // 0
+    allNewsCategories.add(await _fetchNewsServices.getHeadlines(Dio())); // 0
     allNewsCategories.add(await _fetchNewsServices.getBusinessNews()); // 1
     allNewsCategories.add(await _fetchNewsServices.getSportsNews()); // 2
     allNewsCategories.add(await _fetchNewsServices.getAfricaNews()); // 3

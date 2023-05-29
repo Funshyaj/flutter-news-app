@@ -1,4 +1,4 @@
-import 'package:demo_app/screens/startup/startup_viewmodel.dart';
+import 'package:News_Daily/screens/startup/startup_viewmodel.dart';
 import 'package:flutter/material.dart';
 import 'package:stacked/stacked.dart';
 
